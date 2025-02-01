@@ -1,0 +1,1 @@
+ /Users/appscrip/Documents/GitHub/my_portfolio/.dart_tool/flutter_build/afa042ec4ac2178e8c5166cebcbb2ccf/native_assets.yaml: 
