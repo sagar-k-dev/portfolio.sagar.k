@@ -1,4 +1,4 @@
-# The proguard configuration file for the following section is /Users/appscrip/Documents/GitHub/my_portfolio/build/app/intermediates/default_proguard_files/global/proguard-android.txt-8.1.0
+# The proguard configuration file for the following section is /Users/appscrip/Documents/GitHub/my_portfolio/build/app/intermediates/default_proguard_files/global/proguard-android-optimize.txt-8.2.1
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 #
@@ -6,15 +6,16 @@
 # the plugin and unpacked at build-time. The files in $ANDROID_HOME are no longer maintained and
 # will be ignored by new version of the Android plugin for Gradle.
 
-# Optimization is turned off by default. Dex does not like code run
-# through the ProGuard optimize steps (and performs some
-# of these optimizations on its own).
-# Note that if you want to enable optimization, you cannot just
-# include optimization flags in your own project configuration file;
-# instead you will need to point to the
-# "proguard-android-optimize.txt" file instead of this one from your
-# project.properties file.
--dontoptimize
+# Optimizations: If you don't want to optimize, use the proguard-android.txt configuration file
+# instead of this one, which turns off the optimization flags.
+# Adding optimization introduces certain risks, since for example not all optimizations performed by
+# ProGuard works on all versions of Dalvik.  The following flags turn off various optimizations
+# known to have issues, but the list may not be complete or up to date. (The "arithmetic"
+# optimization can be used if you are only targeting Android 2.0 or later.)  Make sure you test
+# thoroughly if you go this route.
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+-optimizationpasses 5
+-allowaccessmodification
 
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
@@ -116,7 +117,7 @@
 # These classes are duplicated between android.jar and core-lambda-stubs.jar.
 -dontnote java.lang.invoke.**
 
-# End of content from /Users/appscrip/Documents/GitHub/my_portfolio/build/app/intermediates/default_proguard_files/global/proguard-android.txt-8.1.0
+# End of content from /Users/appscrip/Documents/GitHub/my_portfolio/build/app/intermediates/default_proguard_files/global/proguard-android-optimize.txt-8.2.1
 # The proguard configuration file for the following section is /Users/appscrip/development/flutter/packages/flutter_tools/gradle/flutter_proguard_rules.pro
 # Build the ephemeral app in a module project.
 # Prevents: Warning: library class <plugin-package> depends on program class io.flutter.plugin.**
@@ -126,6 +127,13 @@
 # The android.** package is provided by the OS at runtime.
 -dontwarn android.**
 
+# In some cases, R8 is incorrectly stripping plugin classes. Keep
+# all implementations of FlutterPlugin until we can determine
+# why this is the case.
+# See https://github.com/flutter/flutter/issues/154580.
+-if class * implements io.flutter.embedding.engine.plugins.FlutterPlugin
+-keep,allowshrinking,allowobfuscation class <1>
+
 # End of content from /Users/appscrip/development/flutter/packages/flutter_tools/gradle/flutter_proguard_rules.pro
 # The proguard configuration file for the following section is /Users/appscrip/Documents/GitHub/my_portfolio/build/app/intermediates/aapt_proguard_file/release/aapt_rules.txt
 -keep class android.app.Application { <init>(); }
@@ -133,9 +141,104 @@
 -keep class androidx.profileinstaller.ProfileInstallReceiver { <init>(); }
 -keep class androidx.startup.InitializationProvider { <init>(); }
 -keep class com.example.portfolio.MainActivity { <init>(); }
+-keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionBarContainer { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionBarContextView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.AlertDialogLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ButtonBarLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ContentFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.DialogTitle { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.SwitchCompat { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.Toolbar { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ViewStubCompat { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.core.widget.NestedScrollView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.preference.UnPressableLinearLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.preference.internal.PreferenceImageView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.recyclerview.widget.RecyclerView { <init>(android.content.Context, android.util.AttributeSet); }
+
 
 # End of content from /Users/appscrip/Documents/GitHub/my_portfolio/build/app/intermediates/aapt_proguard_file/release/aapt_rules.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/63d3b185799b2c098a0f6ed885ea8db1/transformed/fragment-1.7.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/3423ad43eb5d78e4c674b032a330d643/transformed/preference-1.2.1/proguard.txt
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Preference objects are inflated via reflection
+-keep public class androidx.preference.Preference {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keep public class * extends androidx.preference.Preference {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/3423ad43eb5d78e4c674b032a330d643/transformed/preference-1.2.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/c029d973be620a8c27af21475e044d05/transformed/appcompat-1.1.0/proguard.txt
+# Copyright (C) 2018 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Ensure that reflectively-loaded inflater is not obfuscated. This can be
+# removed when we stop supporting AAPT1 builds.
+-keepnames class androidx.appcompat.app.AppCompatViewInflater
+
+# aapt is not able to read app::actionViewClass and app:actionProviderClass to produce proguard
+# keep rules. Add a commonly used SearchView to the keep list until b/109831488 is resolved.
+-keep class androidx.appcompat.widget.SearchView { <init>(...); }
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/c029d973be620a8c27af21475e044d05/transformed/appcompat-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/34b9e8114ed50492479eb875aa77a652/transformed/fragment-1.7.1/proguard.txt
 # Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -166,8 +269,31 @@
     public <init>();
 }
 
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/63d3b185799b2c098a0f6ed885ea8db1/transformed/fragment-1.7.1/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/a017c0c1c150e766625df730ca1d1522/transformed/jetified-window-1.2.0/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/34b9e8114ed50492479eb875aa77a652/transformed/fragment-1.7.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/65cfd5b8a1fe8faa1c1e5683d3fcc2b8/transformed/recyclerview-1.0.0/proguard.txt
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# When layoutManager xml attribute is used, RecyclerView inflates
+#LayoutManagers' constructors using reflection.
+-keep public class * extends androidx.recyclerview.widget.RecyclerView$LayoutManager {
+    public <init>(android.content.Context, android.util.AttributeSet, int, int);
+    public <init>();
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/65cfd5b8a1fe8faa1c1e5683d3fcc2b8/transformed/recyclerview-1.0.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/b61292485483c7499e83c4f5c6f9bd1a/transformed/jetified-window-1.2.0/proguard.txt
 # Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -195,8 +321,8 @@
 }
 # Required for window area API reflection guard
 -keep interface androidx.window.area.reflectionguard.* {*;}
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/a017c0c1c150e766625df730ca1d1522/transformed/jetified-window-1.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/6066a53547e8fbcf4f45946ad85f0e5d/transformed/lifecycle-viewmodel-2.7.0/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/b61292485483c7499e83c4f5c6f9bd1a/transformed/jetified-window-1.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/d69b771f4769b70dad1852df9d1e5343/transformed/lifecycle-viewmodel-2.7.0/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
     <init>();
 }
@@ -205,8 +331,8 @@
     <init>(android.app.Application);
 }
 
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/6066a53547e8fbcf4f45946ad85f0e5d/transformed/lifecycle-viewmodel-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/5faa35d8b556276be34f51d63001a29f/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/d69b771f4769b70dad1852df9d1e5343/transformed/lifecycle-viewmodel-2.7.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/a6ab75c46c16bb6c7a3c9df5177c45de/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
     <init>(androidx.lifecycle.SavedStateHandle);
 }
@@ -215,8 +341,76 @@
     <init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
 }
 
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/5faa35d8b556276be34f51d63001a29f/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/28ee8a5ebc96d117de5598ee6fce01ba/transformed/core-1.13.1/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/a6ab75c46c16bb6c7a3c9df5177c45de/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/8f157f66423597c1afae86f47ee03e65/transformed/coordinatorlayout-1.0.0/proguard.txt
+# Copyright (C) 2016 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# CoordinatorLayout resolves the behaviors of its child components with reflection.
+-keep public class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>();
+}
+
+# Make sure we keep annotations for CoordinatorLayout's DefaultBehavior and ViewPager's DecorView
+-keepattributes *Annotation*
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/8f157f66423597c1afae86f47ee03e65/transformed/coordinatorlayout-1.0.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/702716da9abbaa9ace42dd05e0800167/transformed/transition-1.4.1/proguard.txt
+# Copyright (C) 2017 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Keep a field in transition that is used to keep a reference to weakly-referenced object
+-keepclassmembers class androidx.transition.ChangeBounds$* extends android.animation.AnimatorListenerAdapter {
+  androidx.transition.ChangeBounds$ViewBounds mViewBounds;
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/702716da9abbaa9ace42dd05e0800167/transformed/transition-1.4.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/29f41d85facebdd928e54c75b088250a/transformed/vectordrawable-animated-1.1.0/proguard.txt
+# Copyright (C) 2016 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# keep setters in VectorDrawables so that animations can still work.
+-keepclassmembers class androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$* {
+   void set*(***);
+   *** get*();
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/29f41d85facebdd928e54c75b088250a/transformed/vectordrawable-animated-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/4cefa050b0c4ea9b1f45909d19944071/transformed/core-1.13.1/proguard.txt
 # Never inline methods, but allow shrinking and obfuscation.
 -keepclassmembernames,allowobfuscation,allowshrinking class androidx.core.view.ViewCompat$Api* {
   <methods>;
@@ -234,8 +428,8 @@
   <methods>;
 }
 
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/28ee8a5ebc96d117de5598ee6fce01ba/transformed/core-1.13.1/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/c3e60d8edb6a86f432de0791fcaa87bd/transformed/lifecycle-runtime-2.7.0/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/4cefa050b0c4ea9b1f45909d19944071/transformed/core-1.13.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/8f08a4fb8a82b417cfcc866aaaa248aa/transformed/lifecycle-runtime-2.7.0/proguard.txt
 -keepattributes AnnotationDefault,
                 RuntimeVisibleAnnotations,
                 RuntimeVisibleParameterAnnotations,
@@ -256,12 +450,12 @@
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 # Also this rule prevents registerIn from being inlined.
 -keepclassmembers class androidx.lifecycle.ReportFragment$LifecycleCallbacks { *; }
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/c3e60d8edb6a86f432de0791fcaa87bd/transformed/lifecycle-runtime-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/6f1de229824e3b626519c3b4ed1eee9b/transformed/jetified-lifecycle-process-2.7.0/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/8f08a4fb8a82b417cfcc866aaaa248aa/transformed/lifecycle-runtime-2.7.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/a4def40035927cb6d856303427b50933/transformed/jetified-lifecycle-process-2.7.0/proguard.txt
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 -keepclassmembers class * extends androidx.lifecycle.EmptyActivityLifecycleCallbacks { *; }
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/6f1de229824e3b626519c3b4ed1eee9b/transformed/jetified-lifecycle-process-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/42e115ca81393979cdff36cce874f0ab/transformed/jetified-savedstate-1.2.1/proguard.txt
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/a4def40035927cb6d856303427b50933/transformed/jetified-lifecycle-process-2.7.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/47338bbf8f160d000bb980bbb8741b0a/transformed/jetified-savedstate-1.2.1/proguard.txt
 # Copyright (C) 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -280,8 +474,105 @@
     <init>();
 }
 
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/42e115ca81393979cdff36cce874f0ab/transformed/jetified-savedstate-1.2.1/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/7de0fc4d421ff11079f9f6accb0b36d2/transformed/rules/lib/META-INF/com.android.tools/r8/coroutines.pro
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/47338bbf8f160d000bb980bbb8741b0a/transformed/jetified-savedstate-1.2.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/14ad1308bd72826207d25cc4c6d38537/transformed/rules/lib/META-INF/proguard/protobuf.pro
+# Recently Protobuf Javalite introduced a change that relies on reflection,
+# which doesn't work with Proguard. This rule keeps the reflection usages in
+# (shaded) Protobuf classes in Tink as-is.
+# The location of this file is determined by
+# - https://developer.android.com/studio/build/shrink-code#configuration-files
+# - https://docs.bazel.build/versions/master/be/java.html#java_library.resources
+# See also:
+# - https://github.com/google/tink/issues/361
+# - https://github.com/protocolbuffers/protobuf/issues/6463
+# WARNING: the shaded package name com.google.crypto.tink.shaded.protobuf must
+# be kept in sync with jar_jar_rules.txt.
+-keepclassmembers class * extends com.google.crypto.tink.shaded.protobuf.GeneratedMessageLite {
+  <fields>;
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/14ad1308bd72826207d25cc4c6d38537/transformed/rules/lib/META-INF/proguard/protobuf.pro
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/6e8db5a03ecfd4c7003ff52b19d087f7/transformed/jetified-startup-runtime-1.1.1/proguard.txt
+# It's important that we preserve initializer names, given they are used in the AndroidManifest.xml.
+-keepnames class * extends androidx.startup.Initializer
+
+# These Proguard rules ensures that ComponentInitializers are are neither shrunk nor obfuscated,
+# and are a part of the primary dex file. This is because they are discovered and instantiated
+# during application startup.
+-keep class * extends androidx.startup.Initializer {
+    # Keep the public no-argument constructor while allowing other methods to be optimized.
+    <init>();
+}
+
+-assumenosideeffects class androidx.startup.StartupLogger { public static <methods>; }
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/6e8db5a03ecfd4c7003ff52b19d087f7/transformed/jetified-startup-runtime-1.1.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/4f34d054faf5cddb02c25f64f9725e9c/transformed/versionedparcelable-1.1.1/proguard.txt
+-keep class * implements androidx.versionedparcelable.VersionedParcelable
+-keep public class android.support.**Parcelizer { *; }
+-keep public class androidx.**Parcelizer { *; }
+-keep public class androidx.versionedparcelable.ParcelImpl
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/4f34d054faf5cddb02c25f64f9725e9c/transformed/versionedparcelable-1.1.1/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/784d3cb3dc6fd4f4fa8a3a8509439dbb/transformed/rules/lib/META-INF/proguard/androidx.datastore_datastore-preferences-core.pro
+-keepclassmembers class * extends androidx.datastore.preferences.protobuf.GeneratedMessageLite {
+    <fields>;
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/784d3cb3dc6fd4f4fa8a3a8509439dbb/transformed/rules/lib/META-INF/proguard/androidx.datastore_datastore-preferences-core.pro
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/2815729b64a2990afe5a146eebbdb448/transformed/jetified-core-1.0.0/proguard.txt
+# Copyright (C) 2022 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# These interfaces must be kept for the client library to invoke methods in extensions.
+-keep interface androidx.window.extensions.core.util.function.Consumer {
+  public void accept(***);
+}
+-keep interface androidx.window.extensions.core.util.function.Predicate {
+  public boolean test(***);
+}
+-keep interface androidx.window.extensions.core.util.function.Function {
+  public *** apply(***);
+}
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/2815729b64a2990afe5a146eebbdb448/transformed/jetified-core-1.0.0/proguard.txt
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/84b07dc983bd669ac0e17a63b8f7fd69/transformed/rules/lib/META-INF/proguard/androidx-annotations.pro
+-keep,allowobfuscation @interface androidx.annotation.Keep
+-keep @androidx.annotation.Keep class * {*;}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @androidx.annotation.Keep <init>(...);
+}
+
+-keepclassmembers,allowobfuscation class * {
+  @androidx.annotation.DoNotInline <methods>;
+}
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/84b07dc983bd669ac0e17a63b8f7fd69/transformed/rules/lib/META-INF/proguard/androidx-annotations.pro
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/44581d3a1317d7f44cafb367e4c530f0/transformed/rules/lib/META-INF/proguard/okio.pro
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/44581d3a1317d7f44cafb367e4c530f0/transformed/rules/lib/META-INF/proguard/okio.pro
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/d7e4f7e7189601fb8ca7a3736dbc0618/transformed/rules/lib/META-INF/com.android.tools/r8/coroutines.pro
 # When editing this file, update the following files as well:
 # - META-INF/proguard/coroutines.pro
 # - META-INF/com.android.tools/proguard/coroutines.pro
@@ -309,8 +600,8 @@
 
 # An annotation used for build tooling, won't be directly accessed.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/7de0fc4d421ff11079f9f6accb0b36d2/transformed/rules/lib/META-INF/com.android.tools/r8/coroutines.pro
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/9f2f622faacd3b3df47fb72b25b2299c/transformed/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/d7e4f7e7189601fb8ca7a3736dbc0618/transformed/rules/lib/META-INF/com.android.tools/r8/coroutines.pro
+# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/0eb42a8cca793c6295054398560e2081/transformed/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
 # Allow R8 to optimize away the FastServiceLoader.
 # Together with ServiceLoader optimization in R8
 # this results in direct instantiation when loading Dispatchers.Main
@@ -334,76 +625,7 @@
     boolean getRECOVER_STACK_TRACES() return false;
 }
 
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/9f2f622faacd3b3df47fb72b25b2299c/transformed/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/7794f10e2cc1161d7666b6dd70a8eed0/transformed/jetified-startup-runtime-1.1.1/proguard.txt
-# It's important that we preserve initializer names, given they are used in the AndroidManifest.xml.
--keepnames class * extends androidx.startup.Initializer
-
-# These Proguard rules ensures that ComponentInitializers are are neither shrunk nor obfuscated,
-# and are a part of the primary dex file. This is because they are discovered and instantiated
-# during application startup.
--keep class * extends androidx.startup.Initializer {
-    # Keep the public no-argument constructor while allowing other methods to be optimized.
-    <init>();
-}
-
--assumenosideeffects class androidx.startup.StartupLogger { public static <methods>; }
-
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/7794f10e2cc1161d7666b6dd70a8eed0/transformed/jetified-startup-runtime-1.1.1/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/2f0ba45887344f18c06d9e56eee53564/transformed/versionedparcelable-1.1.1/proguard.txt
--keep class * implements androidx.versionedparcelable.VersionedParcelable
--keep public class android.support.**Parcelizer { *; }
--keep public class androidx.**Parcelizer { *; }
--keep public class androidx.versionedparcelable.ParcelImpl
-
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/2f0ba45887344f18c06d9e56eee53564/transformed/versionedparcelable-1.1.1/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/4ff43cf3d056aae38d02ffded0cc6e24/transformed/jetified-core-1.0.0/proguard.txt
-# Copyright (C) 2022 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# These interfaces must be kept for the client library to invoke methods in extensions.
--keep interface androidx.window.extensions.core.util.function.Consumer {
-  public void accept(***);
-}
--keep interface androidx.window.extensions.core.util.function.Predicate {
-  public boolean test(***);
-}
--keep interface androidx.window.extensions.core.util.function.Function {
-  public *** apply(***);
-}
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/4ff43cf3d056aae38d02ffded0cc6e24/transformed/jetified-core-1.0.0/proguard.txt
-# The proguard configuration file for the following section is /Users/appscrip/.gradle/caches/transforms-3/b314ca8519be31ff880f6fe026b5bc82/transformed/rules/lib/META-INF/proguard/androidx-annotations.pro
--keep,allowobfuscation @interface androidx.annotation.Keep
--keep @androidx.annotation.Keep class * {*;}
-
--keepclasseswithmembers class * {
-    @androidx.annotation.Keep <methods>;
-}
-
--keepclasseswithmembers class * {
-    @androidx.annotation.Keep <fields>;
-}
-
--keepclasseswithmembers class * {
-    @androidx.annotation.Keep <init>(...);
-}
-
--keepclassmembers,allowobfuscation class * {
-  @androidx.annotation.DoNotInline <methods>;
-}
-
-# End of content from /Users/appscrip/.gradle/caches/transforms-3/b314ca8519be31ff880f6fe026b5bc82/transformed/rules/lib/META-INF/proguard/androidx-annotations.pro
+# End of content from /Users/appscrip/.gradle/caches/transforms-3/0eb42a8cca793c6295054398560e2081/transformed/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
 # The proguard configuration file for the following section is <unknown>
 
 # End of content from <unknown>
