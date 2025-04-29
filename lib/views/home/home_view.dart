@@ -59,6 +59,9 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           CustomScrollView(
+            scrollBehavior: const ScrollBehavior().copyWith(
+              scrollbars: true,
+            ),
             controller: _scrollController,
             slivers: [
               SliverAppBar(
@@ -68,15 +71,48 @@ class _HomeViewState extends State<HomeView> {
                 backgroundColor:
                     _isScrolled ? Colors.black : Colors.transparent,
                 automaticallyImplyLeading: false,
+                titleSpacing: 0,
+                toolbarHeight: Dimens.twenty,
                 title: Container(
-                  padding: EdgeInsets.symmetric(horizontal: Dimens.thirty),
+                  margin: EdgeInsets.symmetric(
+                      horizontal: Dimens.thirty, vertical: Dimens.five),
                   child: Row(
                     children: [
-                      Text(
-                        'Sagar K',
-                        style: Styles.white10.copyWith(
-                          color: ColorsValue.primaryColor,
-                          fontWeight: FontWeight.bold,
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'S',
+                              style: Styles.white10
+                                  .copyWith(color: ColorsValue.primaryColor),
+                            ),
+                            TextSpan(
+                              text: 'agar ',
+                              style: Styles.white10,
+                            ),
+                            TextSpan(
+                              text: 'K',
+                              style: Styles.white10
+                                  .copyWith(color: ColorsValue.primaryColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Dimens.boxWidth10,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimens.four, vertical: Dimens.one),
+                        decoration: BoxDecoration(
+                          color: ColorsValue.primaryColor.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(Dimens.ten),
+                          border: Border.all(color: ColorsValue.primaryColor),
+                        ),
+                        child: Text(
+                          'Frontend Developer',
+                          style: Styles.white10.copyWith(
+                            fontSize: Dimens.three,
+                            color: ColorsValue.primaryColor,
+                          ),
                         ),
                       ),
                       const Spacer(),
@@ -151,7 +187,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         onPressed: () {},
                         child: Text(
-                          'ABOUT',
+                          'CONTACT',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: GoogleFonts.poppins().fontFamily,
@@ -170,7 +206,7 @@ class _HomeViewState extends State<HomeView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Dimens.boxHeight40,
+                      Dimens.boxHeight20,
                       Row(
                         children: [
                           Expanded(
@@ -182,48 +218,37 @@ class _HomeViewState extends State<HomeView> {
                                       style: Styles.white10
                                           .copyWith(fontSize: Dimens.eight)),
                                   TextSpan(
-                                    text: 'Sagar',
+                                    text: 'S',
+                                    style: Styles.white16.copyWith(
+                                        color: ColorsValue.primaryColor),
+                                  ),
+                                  TextSpan(
+                                    text: 'agar',
                                     style: Styles.white16,
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        '\nI bring 3+ years of experience developing cross-platform applications with Flutter, Dart and Firebase. Proven track record in building efficient, robust applications with strong focus on UI/UX design. Utilize AI-powered tools to optimize development workflows and enhance productivity.',
+                                    style: Styles.white10.copyWith(
+                                      fontSize: Dimens.four,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
                           Expanded(
-                              child: Image.asset('assets/flutter_birds.png')),
+                              child:
+                                  Lottie.asset('assets/hello_animation.json')),
                         ],
                       ),
-                      SizedBox(height: Dimens.twenty),
-                      Text(
-                        'Scroll down to see the sticky app bar in action',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Dimens.sixteen,
-                        ),
-                      ),
-
-                      // Add more content to make scrolling possible
-                      SizedBox(height: Dimens.fifty),
-                      ...List.generate(
-                        10,
-                        (index) => Container(
-                          margin: EdgeInsets.only(bottom: Dimens.twenty),
-                          height: Dimens.twoHundred,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(Dimens.eight),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Content ${index + 1}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: Dimens.twenty,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Text(
+                      //   'Scroll down to see the sticky app bar in action',
+                      //   style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: Dimens.sixteen,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

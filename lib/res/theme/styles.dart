@@ -35,6 +35,7 @@ class Styles {
     color: Colors.white,
     fontSize: Dimens.ten,
     fontFamily: fontFamily,
+    fontWeight: FontWeight.w100,
   );
 
   // Bold styles

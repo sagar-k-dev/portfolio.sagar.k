@@ -13,6 +13,7 @@ class Dimens {
   static final double zero = 0.sp;
   static final double one = 1.sp;
   static final double two = 2.sp;
+  static final double three = 3.sp;
   static final double four = 4.sp;
   static final double five = 5.sp;
   static final double six = 6.sp;
@@ -63,7 +64,6 @@ class Dimens {
   static final Widget boxHeight24 = SizedBox(height: twentyFour);
   static final Widget boxHeight32 = SizedBox(height: thirtyTwo);
   static final Widget boxHeight30 = SizedBox(height: thirty);
-  static final Widget boxHeight40 = SizedBox(height: forty);
   static final Widget boxWidth2 = SizedBox(width: two);
   static final Widget boxWidth4 = SizedBox(width: four);
   static final Widget boxWidth8 = SizedBox(width: eight);
