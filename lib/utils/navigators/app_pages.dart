@@ -17,28 +17,14 @@ class AppPages {
     milliseconds: 350,
   );
 
-  static const initial = Routes.splash;
+  static const initial = Routes.home;
 
   static final pages = [
-    GetPage<SplashView>(
-      name: Routes.splash,
-      transitionDuration: transitionDuration,
-      page: SplashView.new,
-      binding: SplashBinding(),
-      transition: Transition.rightToLeft,
-    ),
     GetPage<HomeView>(
       name: Routes.home,
       transitionDuration: transitionDuration,
       page: HomeView.new,
       binding: HomeBinding(),
-      transition: Transition.rightToLeft,
-    ),
-    GetPage<AuthView>(
-      name: Routes.home,
-      transitionDuration: transitionDuration,
-      page: AuthView.new,
-      binding: AuthBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

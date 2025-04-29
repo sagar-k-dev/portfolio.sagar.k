@@ -21,7 +21,8 @@ class Dimens {
   static final double nine = 9.sp;
   static final double ten = 10.sp;
   static final double twelve = 12.sp;
-
+  static final double thirteen = 13.sp;
+  static final double fourteen = 14.sp;
   static final double fifteen = 15.sp;
   static final double sixteen = 16.sp;
   static final double twenty = 20.sp;
@@ -61,7 +62,8 @@ class Dimens {
   static final Widget boxHeight20 = SizedBox(height: twenty);
   static final Widget boxHeight24 = SizedBox(height: twentyFour);
   static final Widget boxHeight32 = SizedBox(height: thirtyTwo);
-
+  static final Widget boxHeight30 = SizedBox(height: thirty);
+  static final Widget boxHeight40 = SizedBox(height: forty);
   static final Widget boxWidth2 = SizedBox(width: two);
   static final Widget boxWidth4 = SizedBox(width: four);
   static final Widget boxWidth8 = SizedBox(width: eight);

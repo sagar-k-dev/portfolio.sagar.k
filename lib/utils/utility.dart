@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../models/models.dart';
 import '../res/res.dart';
-import '../widgets/widgets.dart';
 import 'enums.dart';
 
 class Utility {
@@ -54,47 +50,6 @@ class Utility {
         ),
       )) ??
       initialTime;
-
-  /// Show loader
-  static void showLoader() async {
-    await Get.dialog(
-      const AppLoader(),
-      barrierDismissible: false,
-    );
-  }
-
-  /// Close loader
-  static void closeLoader() {
-    closeDialog();
-  }
-
-  /// Show error dialog from response model
-  static Future<void> showInfoDialog(
-    ResponseModel data, [
-    bool isSuccess = false,
-    String? title,
-  ]) async {
-    await Get.dialog(
-      CupertinoAlertDialog(
-        title: Text(
-          title ?? (isSuccess ? 'Success' : 'Error'),
-        ),
-        content: Text(
-          jsonDecode(data.data)['message'] as String,
-        ),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: Get.back,
-            isDefaultAction: true,
-            child: Text(
-              'Okay',
-              style: Styles.black16,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   /// Show info dialog
   static void showDialog(
@@ -178,9 +133,6 @@ class Utility {
         break;
       case MessageType.success:
         backgroundColor = Colors.green;
-        break;
-      default:
-        backgroundColor = Colors.black;
         break;
     }
     Future.delayed(

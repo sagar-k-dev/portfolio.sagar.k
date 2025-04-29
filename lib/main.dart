@@ -1,32 +1,13 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import 'data/data.dart';
-import 'res/res.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/res/res.dart';
 import 'utils/navigators/navigators.dart';
-import 'utils/utils.dart';
 
-void main() async {
-  await _setup();
-  runApp(const MyApp());
-}
-
-Future<void> _setup() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(DeviceConfig()).init();
-  Get.lazyPut(SharedPreferencesManager.new);
-  await Future.wait([
-    AppConfig.init(
-      const EnvConfig(
-        appTitle: AppConstants.appName,
-        appFlavor: AppFlavor.dev,
-      ),
-    ),
-    Get.put<DBWrapper>(DBWrapper()).init(),
-  ]);
-  Get.put<ApiWrapper>(ApiWrapper());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -38,11 +19,38 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  Widget build(BuildContext context) => GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primaryColor: Colors.purple),
-        translations: TranslationsFile(),
-        getPages: AppPages.pages,
-        initialRoute: AppPages.initial,
+  Widget build(BuildContext context) => ScreenUtilInit(
+        minTextAdapt: true,
+        useInheritedMediaQuery: true,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: const TextScaler.linear(1.0)),
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: ColorsValue.primaryColor,
+              fontFamily: GoogleFonts.montserrat().fontFamily,
+              textTheme: GoogleFonts.montserratTextTheme(
+                Theme.of(context).textTheme,
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  textStyle: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                  ),
+                ),
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  textStyle: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                  ),
+                ),
+              ),
+            ),
+            getPages: AppPages.pages,
+            initialRoute: AppPages.initial,
+          ),
+        ),
       );
 }

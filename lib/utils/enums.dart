@@ -17,3 +17,9 @@ enum MessageType {
   success,
   information;
 }
+
+enum DeviceScreenType {
+  mobile,
+  tablet,
+  web;
+}
