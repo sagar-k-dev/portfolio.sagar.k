@@ -9,25 +9,21 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) => ScreenUtilInit(
-        minTextAdapt: true,
-        useInheritedMediaQuery: true,
-        builder: (context, child) => GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primaryColor: ColorsValue.primaryColor,
-          ),
-          getPages: AppPages.pages,
-          initialRoute: AppPages.initial,
+  Widget build(BuildContext context) => GetMaterialApp(
+        // builder: (context, child) => MediaQuery(
+        //   data: MediaQuery.of(context)
+        //       .copyWith(textScaler: const TextScaler.linear(1.0)),
+        //   child: child!,
+        // ),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: ColorsValue.primaryColor,
         ),
+        getPages: AppPages.pages,
+        initialRoute: AppPages.initial,
       );
 }

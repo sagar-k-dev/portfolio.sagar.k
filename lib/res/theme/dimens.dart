@@ -10,46 +10,47 @@ class Dimens {
   /// Get the width with the percent value of the screen width.
   static double percentWidth(double percentValue) => percentValue.sw;
 
-  static final double zero = 0.sp;
-  static final double one = 1.sp;
-  static final double two = 2.sp;
-  static final double three = 3.sp;
-  static final double four = 4.sp;
-  static final double five = 5.sp;
-  static final double six = 6.sp;
+  static final double zero = 0;
+  static final double one = 1;
+  static final double two = 2;
+  static final double three = 3;
+  static final double four = 4;
+  static final double five = 5;
+  static final double six = 6;
 
-  static final double eight = 8.sp;
-  static final double nine = 9.sp;
-  static final double ten = 10.sp;
-  static final double twelve = 12.sp;
-  static final double thirteen = 13.sp;
-  static final double fourteen = 14.sp;
-  static final double fifteen = 15.sp;
-  static final double sixteen = 16.sp;
-  static final double twenty = 20.sp;
-  static final double twentyFour = 24.sp;
-  static final double twentyFive = 25.sp;
+  static final double eight = 8;
+  static final double nine = 9;
+  static final double ten = 10;
+  static final double twelve = 12;
+  static final double thirteen = 13;
+  static final double fourteen = 14;
+  static final double fifteen = 15;
+  static final double sixteen = 16;
+  static final double twenty = 20;
+  static final double twentyTwo = 22;
+  static final double twentyFour = 24;
+  static final double twentyFive = 25;
 
-  static final double thirty = 30.sp;
-  static final double thirtyTwo = 32.sp;
+  static final double thirty = 30;
+  static final double thirtyTwo = 32;
 
-  static final double forty = 40.sp;
-  static final double fifty = 50.sp;
-  static final double fiftyFive = 55.sp;
-  static final double sixty = 60.sp;
-  static final double seventyEight = 78.sp;
+  static final double forty = 40;
+  static final double fifty = 50;
+  static final double fiftyFive = 55;
+  static final double sixty = 60;
+  static final double seventyEight = 78;
 
-  static final double eighty = 80.sp;
-  static final double ninty = 90.sp;
+  static final double eighty = 80;
+  static final double ninty = 90;
 
-  static final double hundred = 100.sp;
-  static final double oneHundredTwenty = 120.sp;
-  static final double hundredFourty = 140.sp;
-  static final double oneHundredFifty = 150.sp;
-  static final double oneHundredSeventy = 170.sp;
-  static final double twoHundred = 200.sp;
-  static final double twoHundredTwenty = 220.sp;
-  static final double twoHundredFifty = 250.sp;
+  static final double hundred = 100;
+  static final double oneHundredTwenty = 120;
+  static final double hundredFourty = 140;
+  static final double oneHundredFifty = 150;
+  static final double oneHundredSeventy = 170;
+  static final double twoHundred = 200;
+  static final double twoHundredTwenty = 220;
+  static final double twoHundredFifty = 250;
 
   static final Widget box0 = SizedBox(height: zero);
 

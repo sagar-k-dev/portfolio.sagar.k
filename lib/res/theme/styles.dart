@@ -7,7 +7,7 @@ class Styles {
   const Styles._();
 
   // Font family
-  static final String fontFamily = GoogleFonts.poppins().fontFamily!;
+  static final String fontFamily = GoogleFonts.roboto().fontFamily!;
 
   // Regular styles
   static TextStyle black16 = TextStyle(
@@ -19,6 +19,26 @@ class Styles {
   static TextStyle white16 = TextStyle(
     color: Colors.white,
     fontSize: Dimens.sixteen,
+    fontFamily: fontFamily,
+  );
+  static TextStyle white20 = TextStyle(
+    color: Colors.white,
+    fontSize: Dimens.twenty,
+    fontFamily: fontFamily,
+  );
+  static TextStyle white22 = TextStyle(
+    color: Colors.white,
+    fontSize: Dimens.twentyTwo,
+    fontFamily: fontFamily,
+  );
+  static TextStyle white24 = TextStyle(
+    color: Colors.white,
+    fontSize: Dimens.twentyFour,
+    fontFamily: fontFamily,
+  );
+  static TextStyle white30 = TextStyle(
+    color: Colors.white,
+    fontSize: Dimens.thirty,
     fontFamily: fontFamily,
   );
   static TextStyle white14 = TextStyle(
