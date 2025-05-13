@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/res/res.dart';
-import 'package:portfolio/views/views.dart';
 
 class CustomeTextButton extends StatelessWidget {
   const CustomeTextButton({
@@ -36,8 +35,7 @@ class CustomeTextButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(title,
-          textScaler: TextScaler.linear(ScaleSize.textScaleFactor(context))),
+      child: Text(title),
     );
   }
 }

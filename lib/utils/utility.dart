@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,14 +12,14 @@ class Utility {
   static void hideKeyboard() => FocusManager.instance.primaryFocus?.unfocus();
 
   /// Returns true if the internet connection is available.
-  static Future<bool> get isNetworkAvailable async {
-    final result = await Connectivity().checkConnectivity();
-    return [
-      ConnectivityResult.mobile,
-      ConnectivityResult.wifi,
-      ConnectivityResult.ethernet
-    ].contains(result);
-  }
+  // static Future<bool> get isNetworkAvailable async {
+  //   final result = await Connectivity().checkConnectivity();
+  //   return [
+  //     ConnectivityResult.mobile,
+  //     ConnectivityResult.wifi,
+  //     ConnectivityResult.ethernet
+  //   ].contains(result);
+  // }
 
   static Future<T?> openBottomSheet<T>(
     Widget child, {

@@ -14,17 +14,17 @@ class DeviceType {
     final deviceWidth = MediaQuery.of(_context).size.width;
 
     if (kIsWeb) {
-      if (deviceWidth < 700) {
+      if (deviceWidth < 600) {
         _deviceType = DeviceScreenType.mobile;
-      } else if (deviceWidth >= 700 && deviceWidth < 1024) {
+      } else if (deviceWidth >= 600 && deviceWidth < 1024) {
         _deviceType = DeviceScreenType.tablet;
       } else {
         _deviceType = DeviceScreenType.web;
       }
     } else {
-      if (deviceWidth < 700) {
+      if (deviceWidth < 600) {
         _deviceType = DeviceScreenType.mobile;
-      } else if (deviceWidth >= 700 && deviceWidth < 1200) {
+      } else if (deviceWidth >= 600 && deviceWidth < 1024) {
         _deviceType = DeviceScreenType.tablet;
       } else {
         _deviceType = DeviceScreenType.web;
