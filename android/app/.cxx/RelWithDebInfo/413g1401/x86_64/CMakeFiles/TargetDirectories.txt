@@ -1,0 +1,2 @@
+/Users/appscrip/Documents/GitHub/my_portfolio/android/app/.cxx/RelWithDebInfo/413g1401/x86_64/CMakeFiles/edit_cache.dir
+/Users/appscrip/Documents/GitHub/my_portfolio/android/app/.cxx/RelWithDebInfo/413g1401/x86_64/CMakeFiles/rebuild_cache.dir
