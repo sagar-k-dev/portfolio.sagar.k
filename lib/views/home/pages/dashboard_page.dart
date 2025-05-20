@@ -6,10 +6,11 @@ import 'package:portfolio/utils/utils.dart';
 import 'package:portfolio/widgets/responsive_builder.dart';
 
 class DashboardPage extends StatelessWidget {
-  final PageController pageController;
+  final Function()? onWorkButtonPressed;
+
   const DashboardPage({
     super.key,
-    required this.pageController,
+    this.onWorkButtonPressed,
   });
 
   @override
@@ -17,17 +18,18 @@ class DashboardPage extends StatelessWidget {
     final device = DeviceType(context).deviceType;
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height,
+      height: device == DeviceScreenType.web
+          ? MediaQuery.of(context).size.height
+          : null,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: device != DeviceScreenType.web
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (device != DeviceScreenType.web) ...[
-            Expanded(
-              flex: 2,
-              child: Center(
-                child: Lottie.asset('assets/hello_animation.json'),
-              ),
+            Center(
+              child: Lottie.asset(AssetConstants.helloAnimation),
             ),
             Dimens.boxHeight20,
           ],
@@ -40,7 +42,6 @@ class DashboardPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  // flex: 2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,15 +81,15 @@ class DashboardPage extends StatelessWidget {
                         children: [
                           CustomChipWidget(
                             title: 'ANDROID',
-                            image: 'assets/android_logo.svg',
+                            image: AssetConstants.androidLogo,
                           ),
                           CustomChipWidget(
                             title: 'IOS',
-                            image: 'assets/apple_logo.svg',
+                            image: AssetConstants.appleLogo,
                           ),
                           CustomChipWidget(
                             title: 'WEB',
-                            image: 'assets/web_app_logo.svg',
+                            image: AssetConstants.webAppLogo,
                           ),
                         ],
                       ),
@@ -107,16 +108,9 @@ class DashboardPage extends StatelessWidget {
                                             vertical: Dimens.fifteen)),
                                     backgroundColor: WidgetStateProperty.all(
                                         ColorsValue.primaryColor
-                                            .withOpacity(0.8)),
+                                            .withValues(alpha: 0.8)),
                                   ),
-                                  onPressed: () {
-                                    pageController.animateToPage(
-                                      2,
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  },
+                                  onPressed: onWorkButtonPressed,
                                   child: Text(
                                     'My Work',
                                     style: Styles.white8.copyWith(
@@ -131,17 +125,26 @@ class DashboardPage extends StatelessWidget {
                                   style: ButtonStyle(
                                     padding: WidgetStateProperty.all(
                                         const EdgeInsets.symmetric(
-                                            vertical: Dimens.fifteen)),
+                                            vertical: Dimens.ten)),
                                     backgroundColor: WidgetStateProperty.all(
                                         ColorsValue.primaryColor
-                                            .withOpacity(0.8)),
+                                            .withValues(alpha: 0.2)),
                                     splashFactory: NoSplash.splashFactory,
+                                    shape: WidgetStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(Dimens.fifty),
+                                        side: const BorderSide(
+                                            color: ColorsValue.primaryColor,
+                                            width: 1.5),
+                                      ),
+                                    ),
                                   ),
                                   onPressed: () {},
                                   child: Text(
                                     'My Resume',
                                     style: Styles.white8.copyWith(
-                                        color: Colors.black,
+                                        color: ColorsValue.primaryColor,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
@@ -154,75 +157,66 @@ class DashboardPage extends StatelessWidget {
                 ),
                 if (device == DeviceScreenType.web)
                   Expanded(
-                    // flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: Dimens.fifty, bottom: Dimens.fifty),
-                      child: Lottie.asset('assets/hello_animation.json'),
+                      child: Lottie.asset(AssetConstants.helloAnimation),
                     ),
                   ),
               ],
             ),
           ),
           if (device != DeviceScreenType.web)
-            Expanded(
-              flex: 2,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        padding: WidgetStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: Dimens.ten)),
-                        backgroundColor:
-                            WidgetStateProperty.all(ColorsValue.primaryColor),
-                      ),
-                      onPressed: () {
-                        pageController.animateToPage(
-                          2,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: Text(
-                        'My Work',
-                        style:
-                            Styles.white8.copyWith(fontWeight: FontWeight.w600),
-                      ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Dimens.boxHeight20,
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: Dimens.ten)),
+                      backgroundColor:
+                          WidgetStateProperty.all(ColorsValue.primaryColor),
+                    ),
+                    onPressed: onWorkButtonPressed,
+                    child: Text(
+                      'My Work',
+                      style:
+                          Styles.white8.copyWith(fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Dimens.boxHeight10,
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        padding: WidgetStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: Dimens.ten)),
-                        backgroundColor: WidgetStateProperty.all(
-                            ColorsValue.primaryColor.withOpacity(0.2)),
-                        splashFactory: NoSplash.splashFactory,
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(Dimens.fifty),
-                            side: const BorderSide(
-                                color: ColorsValue.primaryColor, width: 1.5),
-                          ),
+                ),
+                Dimens.boxHeight10,
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(vertical: Dimens.ten)),
+                      backgroundColor: WidgetStateProperty.all(
+                          ColorsValue.primaryColor.withValues(alpha: 0.2)),
+                      splashFactory: NoSplash.splashFactory,
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(Dimens.fifty),
+                          side: const BorderSide(
+                              color: ColorsValue.primaryColor, width: 1.5),
                         ),
                       ),
-                      onPressed: () {},
-                      child: Text(
-                        'My Resume',
-                        style: Styles.white8.copyWith(
-                            color: ColorsValue.primaryColor,
-                            fontWeight: FontWeight.w600),
-                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      'My Resume',
+                      style: Styles.white8.copyWith(
+                          color: ColorsValue.primaryColor,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
         ],
       ),
@@ -245,14 +239,23 @@ class CustomChipWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: Dimens.ten, vertical: Dimens.three),
       decoration: BoxDecoration(
-        color: ColorsValue.primaryColor.withOpacity(0.1),
+        color: ColorsValue.primaryColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(Dimens.fifty),
         border: Border.all(color: ColorsValue.primaryColor),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 5,
         children: [
-          SvgPicture.asset(image, height: 20, width: 20),
+          SvgPicture.asset(
+            image,
+            height: 20,
+            width: 20,
+            colorFilter: const ColorFilter.mode(
+              ColorsValue.primaryColor,
+              BlendMode.srcIn,
+            ),
+          ),
           Text(
             title,
             style: Styles.white8.copyWith(

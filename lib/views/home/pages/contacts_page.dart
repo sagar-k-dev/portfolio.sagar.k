@@ -12,11 +12,11 @@ class ContactsPage extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'CONTACT',
-            style: Styles.white30.copyWith(
+            'CONTACT ME',
+            style: Styles.white14.copyWith(
               color: ColorsValue.primaryColor,
               fontWeight: FontWeight.bold,
             ),

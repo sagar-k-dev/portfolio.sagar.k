@@ -19,7 +19,7 @@ class SkillsItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(Dimens.ten),
       decoration: BoxDecoration(
-        color: ColorsValue.primaryColor.withOpacity(0.2),
+        color: ColorsValue.primaryColor.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(Dimens.ten),
         border: Border.all(color: ColorsValue.primaryColor),
       ),
@@ -30,16 +30,24 @@ class SkillsItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: Styles.white16),
+              Text(
+                title,
+                style: Styles.white12.copyWith(color: ColorsValue.primaryColor),
+              ),
               SvgPicture.asset(
                 image,
-                width: Dimens.twenty,
-                height: Dimens.twenty,
+                width: Dimens.thirty,
+                height: Dimens.thirty,
               ),
             ],
           ),
           Dimens.boxHeight10,
-          Text(description, style: Styles.white10),
+          Text(
+            description,
+            style: Styles.white10.copyWith(
+              color: Colors.white.withValues(alpha: 0.5),
+            ),
+          ),
         ],
       ),
     );

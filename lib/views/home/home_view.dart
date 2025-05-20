@@ -21,7 +21,24 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool _isHovered = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final PageController _pageController = PageController(initialPage: 0);
+  final ScrollController _scrollController = ScrollController();
+
+  // Keys for each section
+  final GlobalKey _homeKey = GlobalKey();
+  final GlobalKey _skillsKey = GlobalKey();
+  final GlobalKey _projectsKey = GlobalKey();
+  final GlobalKey _contactKey = GlobalKey();
+
+  void _scrollToSection(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.black.withValues(alpha: 0.9),
       endDrawer: Drawer(
         surfaceTintColor: Colors.white,
         shape: const RoundedRectangleBorder(
@@ -38,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
             bottomRight: Radius.circular(Dimens.zero),
           ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black.withValues(alpha: 0.9),
         child: SafeArea(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -61,51 +78,35 @@ class _HomeViewState extends State<HomeView> {
               ),
               Dimens.boxHeight10,
               ListTile(
-                hoverColor: ColorsValue.primaryColor.withOpacity(0.3),
+                hoverColor: ColorsValue.primaryColor.withValues(alpha: 0.3),
                 title: Text('HOME', style: Styles.white12),
                 onTap: () {
                   Navigator.pop(context);
-                  _pageController.animateToPage(
-                    0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
+                  _scrollToSection(_homeKey);
                 },
               ),
               ListTile(
-                hoverColor: ColorsValue.primaryColor.withOpacity(0.3),
+                hoverColor: ColorsValue.primaryColor.withValues(alpha: 0.3),
                 title: Text('SKILLS', style: Styles.white12),
                 onTap: () {
                   Navigator.pop(context);
-                  _pageController.animateToPage(
-                    1,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
+                  _scrollToSection(_skillsKey);
                 },
               ),
               ListTile(
-                hoverColor: ColorsValue.primaryColor.withOpacity(0.3),
+                hoverColor: ColorsValue.primaryColor.withValues(alpha: 0.3),
                 title: Text('PROJECTS', style: Styles.white12),
                 onTap: () {
                   Navigator.pop(context);
-                  _pageController.animateToPage(
-                    2,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
+                  _scrollToSection(_projectsKey);
                 },
               ),
               ListTile(
-                hoverColor: ColorsValue.primaryColor.withOpacity(0.3),
+                hoverColor: ColorsValue.primaryColor.withValues(alpha: 0.3),
                 title: Text('CONTACT', style: Styles.white12),
                 onTap: () {
                   Navigator.pop(context);
-                  _pageController.animateToPage(
-                    3,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                  );
+                  _scrollToSection(_contactKey);
                 },
               ),
             ],
@@ -157,7 +158,7 @@ class _HomeViewState extends State<HomeView> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: Dimens.ten, vertical: Dimens.three),
                 decoration: BoxDecoration(
-                  color: ColorsValue.primaryColor.withOpacity(0.2),
+                  color: ColorsValue.primaryColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(Dimens.fifty),
                   border: Border.all(color: ColorsValue.primaryColor),
                 ),
@@ -165,51 +166,27 @@ class _HomeViewState extends State<HomeView> {
                   'Frontend Developer',
                   style: Styles.white10.copyWith(
                     color: ColorsValue.primaryColor,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
               if (device == DeviceScreenType.web) ...[
                 const Spacer(),
-                CustomeTextButton(
+                CustomTextButton(
                   title: 'HOME',
-                  onPressed: () {
-                    _pageController.animateToPage(
-                      0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
+                  onPressed: () => _scrollToSection(_homeKey),
                 ),
-                CustomeTextButton(
+                CustomTextButton(
                   title: 'SKILLS',
-                  onPressed: () {
-                    _pageController.animateToPage(
-                      1,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
+                  onPressed: () => _scrollToSection(_skillsKey),
                 ),
-                CustomeTextButton(
+                CustomTextButton(
                   title: 'PROJECTS',
-                  onPressed: () {
-                    _pageController.animateToPage(
-                      2,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
+                  onPressed: () => _scrollToSection(_projectsKey),
                 ),
-                CustomeTextButton(
+                CustomTextButton(
                   title: 'CONTACT',
-                  onPressed: () {
-                    _pageController.animateToPage(
-                      3,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
-                  },
+                  onPressed: () => _scrollToSection(_contactKey),
                 ),
               ],
               if (device != DeviceScreenType.web) ...[
@@ -247,20 +224,23 @@ class _HomeViewState extends State<HomeView> {
               width: MediaQuery.of(context).size.width,
               child: Opacity(
                 opacity: 0.1,
-                child: Lottie.asset('assets/background_animation.json',
+                child: Lottie.asset(AssetConstants.backgroundAnimation,
                     fit: BoxFit.contain),
               ),
             ),
-            PageView(
-              controller: _pageController,
-              scrollDirection: Axis.vertical,
-              pageSnapping: false,
-              children: [
-                DashboardPage(pageController: _pageController),
-                const SkillPage(),
-                const ProjectsPage(),
-                const ContactsPage(),
-              ],
+            SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  DashboardPage(
+                    key: _homeKey,
+                    onWorkButtonPressed: () => _scrollToSection(_projectsKey),
+                  ),
+                  SkillPage(key: _skillsKey),
+                  ProjectsPage(key: _projectsKey),
+                  ContactsPage(key: _contactKey),
+                ],
+              ),
             ),
           ],
         ),

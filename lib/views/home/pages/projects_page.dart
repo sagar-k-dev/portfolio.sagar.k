@@ -12,20 +12,16 @@ class ProjectsPage extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'PROJECTS',
-            style: Styles.white30.copyWith(
+            'PROJECTS ACCOMPLISHED',
+            style: Styles.white14.copyWith(
               color: ColorsValue.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           Dimens.boxHeight20,
-          Text(
-            'Portfolio highlights coming soon',
-            style: Styles.white16,
-          ),
         ],
       ),
     );

@@ -29,7 +29,7 @@ class Utility {
   }) async =>
       await Get.bottomSheet<T>(
         child,
-        barrierColor: Colors.black.withOpacity(0.7),
+        barrierColor: Colors.black.withValues(alpha: 0.7),
         backgroundColor: backgroundColor,
         isDismissible: isDismissible,
         shape: shape,

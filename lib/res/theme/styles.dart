@@ -55,6 +55,7 @@ class Styles {
     color: Colors.white,
     fontSize: Dimens.ten,
     fontFamily: fontFamily,
+    fontWeight: FontWeight.w100,
   );
   static TextStyle white8 = TextStyle(
     color: Colors.white,
