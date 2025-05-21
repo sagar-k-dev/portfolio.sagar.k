@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../res/res.dart';
 import 'enums.dart';
@@ -165,6 +166,26 @@ class Utility {
     var currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
+    }
+  }
+
+  /// Launch web url in browser
+  ///
+  static void launchURL(String webUrl) async {
+    var url = Uri.parse(webUrl);
+    try {
+      if (!await launchUrl(
+        url,
+        mode: LaunchMode.platformDefault,
+        webOnlyWindowName: '_blank',
+      )) {
+        throw Exception('Could not launch $url');
+      }
+    } catch (e) {
+      Utility.showMessage(
+        message: 'Could not launch $url',
+        type: MessageType.error,
+      );
     }
   }
 }

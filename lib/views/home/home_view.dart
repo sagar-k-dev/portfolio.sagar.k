@@ -237,7 +237,10 @@ class _HomeViewState extends State<HomeView> {
                     onWorkButtonPressed: () => _scrollToSection(_projectsKey),
                   ),
                   SkillPage(key: _skillsKey),
-                  ProjectsPage(key: _projectsKey),
+                  ProjectsPage(
+                    key: _projectsKey,
+                    onContactMePressed: () => _scrollToSection(_contactKey),
+                  ),
                   ContactsPage(key: _contactKey),
                 ],
               ),

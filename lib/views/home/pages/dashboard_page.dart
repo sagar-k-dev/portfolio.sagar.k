@@ -184,8 +184,8 @@ class DashboardPage extends StatelessWidget {
                     onPressed: onWorkButtonPressed,
                     child: Text(
                       'My Work',
-                      style:
-                          Styles.white8.copyWith(fontWeight: FontWeight.w600),
+                      style: Styles.white8.copyWith(
+                          fontWeight: FontWeight.w600, color: Colors.black),
                     ),
                   ),
                 ),

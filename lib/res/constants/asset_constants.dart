@@ -27,4 +27,16 @@ class AssetConstants {
   static const String cursorLogo = 'assets/cursor_logo.svg';
   static const String jiraLogo = 'assets/jira_logo.svg';
   static const String trelloLogo = 'assets/trello_logo.svg';
+  static const String youPlaceholder = 'assets/you_placeholder.png';
+  static const String playStoreLogo = 'assets/play_store.svg';
+  static const String appStoreLogo = 'assets/app_store.svg';
+  static const String websiteLogo = 'assets/website.svg';
+
+  static const String instrucko = 'assets/app_icons/instrucko.webp';
+  static const String dignityTransportation =
+      'assets/app_icons/dignity_transportation.webp';
+  static const String foretees = 'assets/app_icons/foretees.webp';
+  static const String forecaddie = 'assets/app_icons/forecaddie.webp';
+  static const String plateaway = 'assets/app_icons/plateaway.png';
+  static const String findAPro = 'assets/app_icons/find_a_pro.webp';
 }

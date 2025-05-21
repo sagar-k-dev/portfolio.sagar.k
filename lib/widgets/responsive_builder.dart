@@ -16,7 +16,7 @@ class DeviceType {
     if (kIsWeb) {
       if (deviceWidth < 600) {
         _deviceType = DeviceScreenType.mobile;
-      } else if (deviceWidth >= 600 && deviceWidth < 1024) {
+      } else if (deviceWidth >= 600 && deviceWidth < 1100) {
         _deviceType = DeviceScreenType.tablet;
       } else {
         _deviceType = DeviceScreenType.web;
@@ -24,7 +24,7 @@ class DeviceType {
     } else {
       if (deviceWidth < 600) {
         _deviceType = DeviceScreenType.mobile;
-      } else if (deviceWidth >= 600 && deviceWidth < 1024) {
+      } else if (deviceWidth >= 600 && deviceWidth < 1100) {
         _deviceType = DeviceScreenType.tablet;
       } else {
         _deviceType = DeviceScreenType.web;
