@@ -96,6 +96,8 @@ class SkillPage extends StatelessWidget {
         bottom: device == DeviceScreenType.web ? 0 : 50,
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (device != DeviceScreenType.web)
             Column(
@@ -170,7 +172,7 @@ class SkillPage extends StatelessWidget {
             ),
           if (device == DeviceScreenType.web)
             Padding(
-              padding: const EdgeInsets.only(bottom: 60),
+              padding: const EdgeInsets.only(bottom: 100),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 100,
@@ -182,7 +184,7 @@ class SkillPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          // height: 300,
+                          height: 300,
                           child: Lottie.asset(
                             AssetConstants.skillsAnimation,
                           ),
