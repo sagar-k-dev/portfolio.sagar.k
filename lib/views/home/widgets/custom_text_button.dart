@@ -16,7 +16,7 @@ class CustomTextButton extends StatelessWidget {
     return TextButton(
       style: ButtonStyle(
         textStyle: WidgetStateProperty.all(
-          Styles.white10.copyWith(
+          Styles.white12.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),

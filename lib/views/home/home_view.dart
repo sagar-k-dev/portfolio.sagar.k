@@ -4,10 +4,9 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio/res/res.dart';
 import 'package:portfolio/utils/utils.dart';
+import 'package:portfolio/views/home/widgets/widgets.dart';
 import 'package:portfolio/views/views.dart';
 import 'package:portfolio/widgets/responsive_builder.dart';
-
-import 'widgets/custom_text_button.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -121,91 +120,97 @@ class _HomeViewState extends State<HomeView> {
         titleSpacing: 0,
         actions: const [SizedBox.shrink()],
         toolbarHeight: device == DeviceScreenType.mobile ? null : 80,
-        title: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: kIsWeb && device == DeviceScreenType.mobile
-                ? Dimens.thirty
-                : device == DeviceScreenType.mobile
-                    ? Dimens.twenty
-                    : Dimens.hundred,
-          ),
-          child: Row(
-            children: [
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'S',
-                      style: Styles.white22.copyWith(
-                          color: ColorsValue.primaryColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(
-                      text: 'agar ',
-                      style: Styles.white20,
-                    ),
-                    TextSpan(
-                      text: 'K',
-                      style: Styles.white22.copyWith(
-                          color: ColorsValue.primaryColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              Dimens.boxWidth10,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: Dimens.ten, vertical: Dimens.three),
-                decoration: BoxDecoration(
-                  color: ColorsValue.primaryColor.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(Dimens.fifty),
-                  border: Border.all(color: ColorsValue.primaryColor),
-                ),
-                child: Text(
-                  'Frontend Developer',
-                  style: Styles.white10.copyWith(
-                    color: ColorsValue.primaryColor,
-                    fontWeight: FontWeight.w600,
+        title: InkWell(
+          splashFactory: NoSplash.splashFactory,
+          highlightColor: Colors.transparent,
+          onTap: () => _scrollToSection(_homeKey),
+          child: Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: kIsWeb && device == DeviceScreenType.mobile
+                  ? Dimens.thirty
+                  : device == DeviceScreenType.mobile
+                      ? Dimens.twenty
+                      : Dimens.hundred,
+            ),
+            child: Row(
+              children: [
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'S',
+                        style: Styles.white22.copyWith(
+                            color: ColorsValue.primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'agar ',
+                        style: Styles.white20,
+                      ),
+                      TextSpan(
+                        text: 'K',
+                        style: Styles.white22.copyWith(
+                            color: ColorsValue.primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              if (device == DeviceScreenType.web) ...[
-                const Spacer(),
-                CustomTextButton(
-                  title: 'HOME',
-                  onPressed: () => _scrollToSection(_homeKey),
+                Dimens.boxWidth10,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: Dimens.ten, vertical: Dimens.three),
+                  decoration: BoxDecoration(
+                    color: ColorsValue.primaryColor.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(Dimens.fifty),
+                    border: Border.all(color: ColorsValue.primaryColor),
+                  ),
+                  child: Text(
+                    'Frontend Developer',
+                    style: Styles.white10.copyWith(
+                      color: ColorsValue.primaryColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
-                CustomTextButton(
-                  title: 'SKILLS',
-                  onPressed: () => _scrollToSection(_skillsKey),
-                ),
-                CustomTextButton(
-                  title: 'PROJECTS',
-                  onPressed: () => _scrollToSection(_projectsKey),
-                ),
-                CustomTextButton(
-                  title: 'CONTACT',
-                  onPressed: () => _scrollToSection(_contactKey),
-                ),
+                if (device == DeviceScreenType.web) ...[
+                  const Spacer(),
+                  CustomTextButton(
+                    title: 'HOME',
+                    onPressed: () => _scrollToSection(_homeKey),
+                  ),
+                  CustomTextButton(
+                    title: 'SKILLS',
+                    onPressed: () => _scrollToSection(_skillsKey),
+                  ),
+                  CustomTextButton(
+                    title: 'PROJECTS',
+                    onPressed: () => _scrollToSection(_projectsKey),
+                  ),
+                  CustomTextButton(
+                    title: 'CONTACT',
+                    onPressed: () => _scrollToSection(_contactKey),
+                  ),
+                ],
+                if (device != DeviceScreenType.web) ...[
+                  const Spacer(),
+                  IconButton(
+                    onHover: (value) {
+                      setState(() {
+                        _isHovered = value;
+                      });
+                    },
+                    onPressed: () {
+                      _scaffoldKey.currentState?.openEndDrawer();
+                    },
+                    icon: Icon(Icons.menu,
+                        color: _isHovered
+                            ? ColorsValue.primaryColor
+                            : Colors.white),
+                  ),
+                ]
               ],
-              if (device != DeviceScreenType.web) ...[
-                const Spacer(),
-                IconButton(
-                  onHover: (value) {
-                    setState(() {
-                      _isHovered = value;
-                    });
-                  },
-                  onPressed: () {
-                    _scaffoldKey.currentState?.openEndDrawer();
-                  },
-                  icon: Icon(Icons.menu,
-                      color:
-                          _isHovered ? ColorsValue.primaryColor : Colors.white),
-                ),
-              ]
-            ],
+            ),
           ),
         ),
       ),

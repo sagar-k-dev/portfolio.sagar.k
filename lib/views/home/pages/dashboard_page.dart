@@ -19,7 +19,7 @@ class DashboardPage extends StatelessWidget {
 
     return SizedBox(
       height: device == DeviceScreenType.web
-          ? MediaQuery.of(context).size.height
+          ? MediaQuery.of(context).size.height - AppBar().preferredSize.height
           : null,
       child: Column(
         mainAxisAlignment: device != DeviceScreenType.web

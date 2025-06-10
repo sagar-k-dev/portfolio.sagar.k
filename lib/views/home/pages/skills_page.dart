@@ -90,162 +90,170 @@ class SkillPage extends StatelessWidget {
 
     return Container(
       height: device == DeviceScreenType.web
-          ? MediaQuery.of(context).size.height
+          ? MediaQuery.of(context).size.height - AppBar().preferredSize.height
           : null,
       margin: EdgeInsets.only(
         bottom: device == DeviceScreenType.web ? 0 : 50,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (device != DeviceScreenType.web)
-            Column(
-              mainAxisAlignment: device != DeviceScreenType.web
-                  ? MainAxisAlignment.start
-                  : MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Lottie.asset(AssetConstants.skillsAnimation,
-                    height: MediaQuery.of(context).size.height * 0.5),
-                Text(
-                  'Leveraging this diverse set of tools and technologies, I build applications that are not only functional and efficient but also intuitive and engaging for users across different platforms. Each tool helps streamline development and enhance the overall user experience, ensuring every app I create is robust and user-centric.',
-                  style: Styles.white10,
-                ),
-                Dimens.boxHeight30,
-                GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: device == DeviceScreenType.mobile
-                          ? 1
-                          : device == DeviceScreenType.tablet
-                              ? orientation == Orientation.portrait
-                                  ? 2
-                                  : 2
-                              : 3,
-                      mainAxisExtent:
-                          device == DeviceScreenType.mobile ? 80 : 100,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10),
-                  itemCount: skills.length,
-                  itemBuilder: (context, index) => Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: ColorsValue.primaryColor.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: ColorsValue.primaryColor),
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (device != DeviceScreenType.web)
+                Column(
+                  mainAxisAlignment: device != DeviceScreenType.web
+                      ? MainAxisAlignment.start
+                      : MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Lottie.asset(AssetConstants.skillsAnimation,
+                        height: MediaQuery.of(context).size.height * 0.5),
+                    Text(
+                      'Leveraging this diverse set of tools and technologies, I build applications that are not only functional and efficient but also intuitive and engaging for users across different platforms. Each tool helps streamline development and enhance the overall user experience, ensuring every app I create is robust and user-centric.',
+                      style: Styles.white10,
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      spacing: 10,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(skills[index]['title']!,
-                                  style: Styles.white12.copyWith()),
-                              Text(
-                                skills[index]['description']!,
-                                style: Styles.white10.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.5),
-                                ),
-                              ),
-                            ],
-                          ),
+                    Dimens.boxHeight30,
+                    GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: device == DeviceScreenType.mobile
+                              ? 1
+                              : device == DeviceScreenType.tablet
+                                  ? orientation == Orientation.portrait
+                                      ? 2
+                                      : 2
+                                  : 3,
+                          mainAxisExtent:
+                              device == DeviceScreenType.mobile ? 80 : 100,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10),
+                      itemCount: skills.length,
+                      itemBuilder: (context, index) => Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color:
+                              ColorsValue.primaryColor.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: ColorsValue.primaryColor),
                         ),
-                        SvgPicture.asset(
-                          skills[index]['image']!,
-                          width: 30,
-                          height: 30,
-                          fit: BoxFit.cover,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          if (device == DeviceScreenType.web)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 100,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 300,
-                          child: Lottie.asset(
-                            AssetConstants.skillsAnimation,
-                          ),
-                        ),
-                        Text(
-                          'Leveraging this diverse set of tools and technologies, I build applications that are not only functional and efficient but also intuitive and engaging for users across different platforms. Each tool helps streamline development and enhance the overall user experience, ensuring every app I create is robust and user-centric.',
-                          style: Styles.white10,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: skills
-                          .map(
-                            (skill) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: ColorsValue.primaryColor
-                                    .withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(color: ColorsValue.primaryColor),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          spacing: 10,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                spacing: 10,
                                 children: [
-                                  Column(
-                                    spacing: 5,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(skill['title']!,
-                                          style: Styles.white10.copyWith()),
-                                      Text(skill['description']!,
-                                          style: Styles.white8),
-                                    ],
-                                  ),
-                                  SvgPicture.asset(
-                                    skill['image']!,
-                                    width: 25,
-                                    height: 25,
-                                    fit: BoxFit.cover,
+                                  Text(skills[index]['title']!,
+                                      style: Styles.white12.copyWith()),
+                                  Text(
+                                    skills[index]['description']!,
+                                    style: Styles.white10.copyWith(
+                                      color:
+                                          Colors.white.withValues(alpha: 0.5),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          )
-                          .toList(),
+                            SvgPicture.asset(
+                              skills[index]['image']!,
+                              width: 30,
+                              height: 30,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                  ],
+                ),
+              if (device == DeviceScreenType.web)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 100),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: 100,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 300,
+                              child: Lottie.asset(
+                                AssetConstants.skillsAnimation,
+                              ),
+                            ),
+                            Text(
+                              'Leveraging this diverse set of tools and technologies, I build applications that are not only functional and efficient but also intuitive and engaging for users across different platforms. Each tool helps streamline development and enhance the overall user experience, ensuring every app I create is robust and user-centric.',
+                              style: Styles.white10,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: skills
+                              .map(
+                                (skill) => Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 8),
+                                  decoration: BoxDecoration(
+                                    color: ColorsValue.primaryColor
+                                        .withValues(alpha: 0.2),
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        color: ColorsValue.primaryColor),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    spacing: 10,
+                                    children: [
+                                      Column(
+                                        spacing: 5,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(skill['title']!,
+                                              style: Styles.white10.copyWith()),
+                                          Text(skill['description']!,
+                                              style: Styles.white8),
+                                        ],
+                                      ),
+                                      SvgPicture.asset(
+                                        skill['image']!,
+                                        width: 25,
+                                        height: 25,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-        ],
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

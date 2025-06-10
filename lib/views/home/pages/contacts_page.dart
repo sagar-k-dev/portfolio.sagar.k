@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/res/res.dart';
+import 'package:portfolio/utils/utils.dart';
+import 'package:portfolio/widgets/widgets.dart';
 
 class ContactsPage extends StatelessWidget {
   const ContactsPage({
@@ -8,8 +10,11 @@ class ContactsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final device = DeviceType(context).deviceType;
     return SizedBox(
-      height: MediaQuery.of(context).size.height,
+      height: device == DeviceScreenType.web
+          ? MediaQuery.of(context).size.height - AppBar().preferredSize.height
+          : null,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

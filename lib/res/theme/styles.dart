@@ -7,7 +7,7 @@ class Styles {
   const Styles._();
 
   // Font family
-  static final String fontFamily = GoogleFonts.poppins().fontFamily!;
+  static final String fontFamily = GoogleFonts.gelasio().fontFamily!;
 
   // Regular styles
   static TextStyle black16 = TextStyle(

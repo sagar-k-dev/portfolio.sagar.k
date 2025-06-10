@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:portfolio/res/res.dart';
 import 'package:portfolio/utils/utils.dart';
 import 'package:portfolio/widgets/widgets.dart';
@@ -82,9 +83,9 @@ class ProjectsPage extends StatelessWidget {
     final device = DeviceType(context).deviceType;
     final orientation = MediaQuery.of(context).orientation;
     return Container(
-      // height: device == DeviceScreenType.web
-      //     ? MediaQuery.of(context).size.height - AppBar().preferredSize.height
-      //     : null,
+      height: device == DeviceScreenType.web
+          ? MediaQuery.of(context).size.height - AppBar().preferredSize.height
+          : null,
       padding: EdgeInsets.only(
         top: device == DeviceScreenType.web ? 0 : 20,
       ),
@@ -100,232 +101,378 @@ class ProjectsPage extends StatelessWidget {
             ),
           ),
           Dimens.boxHeight20,
-          MasonryGridView.count(
-            crossAxisCount: device == DeviceScreenType.mobile
-                ? 1
-                : device == DeviceScreenType.tablet
-                    ? orientation == Orientation.portrait
-                        ? 1
-                        : 2
-                    : 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: projects.length,
-            itemBuilder: (context, index) => Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: ColorsValue.primaryColor.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: ColorsValue.primaryColor),
-              ),
-              child: Column(
-                spacing: 15,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    spacing: 15,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          projects[index]['image']!,
-                          height: 70,
-                          width: 70,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          projects[index]['title']!,
-                          style: Styles.white12,
-                        ),
-                      ),
-                    ],
+          device == DeviceScreenType.web
+              ? _buildWebCarousel(context)
+              : _buildMobileItem(device, orientation),
+          Dimens.boxHeight50,
+        ],
+      ),
+    );
+  }
+
+  MasonryGridView _buildMobileItem(
+      DeviceScreenType device, Orientation orientation) {
+    return MasonryGridView.count(
+      crossAxisCount: device == DeviceScreenType.mobile
+          ? 1
+          : device == DeviceScreenType.tablet
+              ? orientation == Orientation.portrait
+                  ? 1
+                  : 2
+              : 3,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: projects.length,
+      itemBuilder: (context, index) => Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: ColorsValue.primaryColor.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: ColorsValue.primaryColor),
+        ),
+        child: Column(
+          spacing: 15,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              spacing: 15,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    projects[index]['image']!,
+                    height: 70,
+                    width: 70,
+                    fit: BoxFit.cover,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+                Expanded(
+                  child: Text(
+                    projects[index]['title']!,
+                    style: Styles.white12,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  projects[index]['description']!,
+                  style: Styles.white8,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Dimens.boxHeight5,
+                InkWell(
+                  splashFactory: NoSplash.splashFactory,
+                  highlightColor: Colors.transparent,
+                  onTap: () {
+                    index == projects.length - 1
+                        ? onContactMePressed()
+                        : showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              final screenSize = MediaQuery.of(context).size;
+                              final dialogWidth = screenSize.width *
+                                  (device == DeviceScreenType.mobile
+                                      ? 0.8
+                                      : device == DeviceScreenType.tablet
+                                          ? 0.7
+                                          : 0.5);
+                              final dialogHeight = screenSize.height *
+                                  (device == DeviceScreenType.mobile
+                                      ? 0.6
+                                      : 0.5);
+
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                backgroundColor: Colors.black,
+                                insetPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 24,
+                                ),
+                                child: Container(
+                                  width: dialogWidth,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 600,
+                                    maxHeight: dialogHeight,
+                                  ),
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: ColorsValue.primaryColor,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        projects[index]['title'] ??
+                                            'Project Details',
+                                        style: Styles.white12.copyWith(
+                                          color: ColorsValue.primaryColor,
+                                        ),
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Flexible(
+                                        child: SingleChildScrollView(
+                                          child: Text(
+                                            projects[index]['description']!,
+                                            style: Styles.white8.copyWith(),
+                                          ),
+                                        ),
+                                      ),
+                                      Dimens.boxHeight10,
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text(
+                                            'Close',
+                                            style: Styles.white10.copyWith(
+                                              color: ColorsValue.primaryColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                  },
+                  child: Text(
+                    index == projects.length - 1 ? 'Contact me' : '...more',
+                    style: Styles.white10.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: ColorsValue.primaryColor,
+                    ),
+                  ),
+                ),
+                Dimens.boxHeight5,
+                if (index != projects.length - 1)
+                  Row(
+                    spacing: 10,
                     children: [
                       Text(
-                        projects[index]['description']!,
-                        style: Styles.white8,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
+                        'Available on:',
+                        style: Styles.white8.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                      Dimens.boxHeight5,
+                      if (projects[index]['playStoreLink'] != null &&
+                          projects[index]['playStoreLink']!.isNotEmpty)
+                        InkWell(
+                          onTap: () => Utility.launchURL(
+                            projects[index]['playStoreLink']!,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: SvgPicture.asset(
+                              AssetConstants.playStoreLogo,
+                              height: 25,
+                              width: 25,
+                            ),
+                          ),
+                        ),
+                      if (projects[index]['appStoreLink'] != null &&
+                          projects[index]['appStoreLink']!.isNotEmpty)
+                        InkWell(
+                          onTap: () => Utility.launchURL(
+                            projects[index]['appStoreLink']!,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: SvgPicture.asset(
+                              AssetConstants.appStoreLogo,
+                              height: 25,
+                              width: 25,
+                            ),
+                          ),
+                        ),
+                      if (projects[index]['websiteLink'] != null &&
+                          projects[index]['websiteLink']!.isNotEmpty)
+                        InkWell(
+                          onTap: () => Utility.launchURL(
+                            projects[index]['websiteLink']!,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: SvgPicture.asset(
+                              AssetConstants.websiteLogo,
+                              height: 25,
+                              width: 25,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWebCarousel(BuildContext context) {
+    return CarouselSlider.builder(
+      itemCount: projects.length,
+      itemBuilder: (context, index, realIndex) {
+        return Container(
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            color: ColorsValue.primaryColor.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: ColorsValue.primaryColor),
+          ),
+          child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              spacing: 15,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  spacing: 15,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        projects[index]['image']!,
+                        height: 70,
+                        width: 70,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        projects[index]['title']!,
+                        style: Styles.white12,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      projects[index]['description']!,
+                      style: Styles.white8,
+                    ),
+                    if (index == projects.length - 1) ...[
+                      Dimens.boxHeight20,
                       InkWell(
                         splashFactory: NoSplash.splashFactory,
                         highlightColor: Colors.transparent,
                         onTap: () {
                           index == projects.length - 1
                               ? onContactMePressed()
-                              : showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    final screenSize =
-                                        MediaQuery.of(context).size;
-                                    final dialogWidth = screenSize.width *
-                                        (device == DeviceScreenType.mobile
-                                            ? 0.8
-                                            : device == DeviceScreenType.tablet
-                                                ? 0.7
-                                                : 0.5);
-                                    final dialogHeight = screenSize.height *
-                                        (device == DeviceScreenType.mobile
-                                            ? 0.6
-                                            : 0.5);
-
-                                    return Dialog(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      backgroundColor: Colors.black,
-                                      insetPadding: const EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: 24,
-                                      ),
-                                      child: Container(
-                                        width: dialogWidth,
-                                        constraints: BoxConstraints(
-                                          maxWidth: 600,
-                                          maxHeight: dialogHeight,
-                                        ),
-                                        padding: const EdgeInsets.all(16),
-                                        decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: ColorsValue.primaryColor,
-                                            width: 1,
-                                          ),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              projects[index]['title'] ??
-                                                  'Project Details',
-                                              style: Styles.white12.copyWith(
-                                                color: ColorsValue.primaryColor,
-                                              ),
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Flexible(
-                                              child: SingleChildScrollView(
-                                                child: Text(
-                                                  projects[index]
-                                                      ['description']!,
-                                                  style:
-                                                      Styles.white8.copyWith(),
-                                                ),
-                                              ),
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Align(
-                                              alignment: Alignment.centerRight,
-                                              child: TextButton(
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
-                                                child: Text(
-                                                  'Close',
-                                                  style:
-                                                      Styles.white10.copyWith(
-                                                    color: ColorsValue
-                                                        .primaryColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
+                              : null;
                         },
                         child: Text(
-                          index == projects.length - 1
-                              ? 'Contact me'
-                              : '...more',
+                          index == projects.length - 1 ? 'Contact Me' : '',
                           style: Styles.white10.copyWith(
                             fontWeight: FontWeight.w500,
                             color: ColorsValue.primaryColor,
                           ),
                         ),
                       ),
-                      Dimens.boxHeight5,
-                      if (index != projects.length - 1)
-                        Row(
-                          spacing: 10,
-                          children: [
-                            Text(
-                              'Available on:',
-                              style: Styles.white8.copyWith(
-                                fontWeight: FontWeight.w500,
+                    ],
+                    Dimens.boxHeight20,
+                    if (index != projects.length - 1)
+                      Row(
+                        spacing: 10,
+                        children: [
+                          Text(
+                            'Available on:',
+                            style: Styles.white8.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          if (projects[index]['playStoreLink'] != null &&
+                              projects[index]['playStoreLink']!.isNotEmpty)
+                            InkWell(
+                              onTap: () => Utility.launchURL(
+                                projects[index]['playStoreLink']!,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: SvgPicture.asset(
+                                  AssetConstants.playStoreLogo,
+                                  height: 25,
+                                  width: 25,
+                                ),
                               ),
                             ),
-                            if (projects[index]['playStoreLink'] != null &&
-                                projects[index]['playStoreLink']!.isNotEmpty)
-                              InkWell(
-                                onTap: () => Utility.launchURL(
-                                  projects[index]['playStoreLink']!,
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: SvgPicture.asset(
-                                    AssetConstants.playStoreLogo,
-                                    height: 25,
-                                    width: 25,
-                                  ),
+                          if (projects[index]['appStoreLink'] != null &&
+                              projects[index]['appStoreLink']!.isNotEmpty)
+                            InkWell(
+                              onTap: () => Utility.launchURL(
+                                projects[index]['appStoreLink']!,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: SvgPicture.asset(
+                                  AssetConstants.appStoreLogo,
+                                  height: 25,
+                                  width: 25,
                                 ),
                               ),
-                            if (projects[index]['appStoreLink'] != null &&
-                                projects[index]['appStoreLink']!.isNotEmpty)
-                              InkWell(
-                                onTap: () => Utility.launchURL(
-                                  projects[index]['appStoreLink']!,
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: SvgPicture.asset(
-                                    AssetConstants.appStoreLogo,
-                                    height: 25,
-                                    width: 25,
-                                  ),
+                            ),
+                          if (projects[index]['websiteLink'] != null &&
+                              projects[index]['websiteLink']!.isNotEmpty)
+                            InkWell(
+                              onTap: () => Utility.launchURL(
+                                projects[index]['websiteLink']!,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: SvgPicture.asset(
+                                  AssetConstants.websiteLogo,
+                                  height: 25,
+                                  width: 25,
                                 ),
                               ),
-                            if (projects[index]['websiteLink'] != null &&
-                                projects[index]['websiteLink']!.isNotEmpty)
-                              InkWell(
-                                onTap: () => Utility.launchURL(
-                                  projects[index]['websiteLink']!,
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: SvgPicture.asset(
-                                    AssetConstants.websiteLogo,
-                                    height: 25,
-                                    width: 25,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                    ],
-                  ),
-                ],
-              ),
+                            ),
+                        ],
+                      ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Dimens.boxHeight50,
-        ],
+        );
+      },
+      options: CarouselOptions(
+        height: 450,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 2),
+        autoPlayAnimationDuration: const Duration(milliseconds: 900),
+        autoPlayCurve: Curves.linearToEaseOut,
+        enlargeCenterPage: true,
+        enlargeFactor: 0.2,
+        viewportFraction: 0.6,
+        enableInfiniteScroll: true,
+        pauseAutoPlayOnTouch: true,
+        pauseAutoPlayInFiniteScroll: false,
       ),
     );
   }
