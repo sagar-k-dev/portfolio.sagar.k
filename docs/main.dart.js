@@ -92997,7 +92997,7 @@ A.a3x.prototype={
 $0(){return A.eW(u.z)},
 $S:0}
 A.a3y.prototype={
-$0(){return A.eW("https://github.com/sagarstark")},
+$0(){return A.eW("https://github.com/sagar-k-dev")},
 $S:0}
 A.a3z.prototype={
 $0(){return A.eW("https://www.instagram.com/sagarstark7/")},
