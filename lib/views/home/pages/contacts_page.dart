@@ -278,7 +278,7 @@ class ContactsPage extends StatelessWidget {
                 ),
                 HoverElevatedButton(
                   onPressed: () =>
-                      Utility.launchURL('https://github.com/sagarstark'),
+                      Utility.launchURL('https://github.com/sagar-k-dev'),
                   icon: AssetConstants.github,
                   label: Text('GitHub', style: Styles.white8),
                   backgroundColor: Color(0xFF612b8f),
