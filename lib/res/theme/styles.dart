@@ -17,49 +17,54 @@ class Styles {
   );
 
   static TextStyle white16 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.sixteen,
     fontFamily: fontFamily,
   );
   static TextStyle white20 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.twenty,
     fontFamily: fontFamily,
   );
   static TextStyle white22 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.twentyTwo,
     fontFamily: fontFamily,
   );
   static TextStyle white24 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.twentyFour,
     fontFamily: fontFamily,
   );
   static TextStyle white30 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.thirty,
     fontFamily: fontFamily,
   );
   static TextStyle white14 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.fourteen,
     fontFamily: fontFamily,
   );
   static TextStyle white12 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.twelve,
     fontFamily: fontFamily,
   );
   static TextStyle white10 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.ten,
     fontFamily: fontFamily,
     fontWeight: FontWeight.w100,
   );
   static TextStyle white8 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.eight,
+    fontFamily: fontFamily,
+  );
+  static TextStyle white6 = TextStyle(
+    color: Colors.white.withValues(alpha: 0.9),
+    fontSize: Dimens.six,
     fontFamily: fontFamily,
   );
 
@@ -72,7 +77,7 @@ class Styles {
   );
 
   static TextStyle whiteBold16 = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.sixteen,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
@@ -80,7 +85,7 @@ class Styles {
 
   // Additional styles
   static TextStyle heading = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.thirtyTwo,
     fontWeight: FontWeight.bold,
     fontFamily: fontFamily,
@@ -88,7 +93,7 @@ class Styles {
   );
 
   static TextStyle subheading = TextStyle(
-    color: Colors.white,
+    color: Colors.white.withValues(alpha: 0.9),
     fontSize: Dimens.twenty,
     fontWeight: FontWeight.w500,
     fontFamily: fontFamily,

@@ -45,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.black.withValues(alpha: 0.9),
+      backgroundColor: Colors.black.withValues(alpha: 0.95),
       endDrawer: Drawer(
         surfaceTintColor: Colors.white,
         shape: const RoundedRectangleBorder(
@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
             bottomRight: Radius.circular(Dimens.zero),
           ),
         ),
-        backgroundColor: Colors.black.withValues(alpha: 0.9),
+        backgroundColor: Colors.black.withValues(alpha: 0.95),
         child: SafeArea(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -120,97 +120,100 @@ class _HomeViewState extends State<HomeView> {
         titleSpacing: 0,
         actions: const [SizedBox.shrink()],
         toolbarHeight: device == DeviceScreenType.mobile ? null : 80,
-        title: InkWell(
-          splashFactory: NoSplash.splashFactory,
-          highlightColor: Colors.transparent,
-          onTap: () => _scrollToSection(_homeKey),
-          child: Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: kIsWeb && device == DeviceScreenType.mobile
-                  ? Dimens.thirty
-                  : device == DeviceScreenType.mobile
-                      ? Dimens.twenty
-                      : Dimens.hundred,
-            ),
-            child: Row(
-              children: [
-                Text.rich(
-                  TextSpan(
-                    children: [
+        title: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: kIsWeb && device == DeviceScreenType.mobile
+                ? Dimens.thirty
+                : device == DeviceScreenType.mobile
+                    ? Dimens.twenty
+                    : Dimens.hundred,
+          ),
+          child: Row(
+            children: [
+              InkWell(
+                splashFactory: NoSplash.splashFactory,
+                highlightColor: Colors.transparent,
+                onTap: () => _scrollToSection(_homeKey),
+                child: Row(
+                  children: [
+                    Text.rich(
                       TextSpan(
-                        text: 'S',
-                        style: Styles.white22.copyWith(
-                            color: ColorsValue.primaryColor,
-                            fontWeight: FontWeight.bold),
+                        children: [
+                          TextSpan(
+                            text: 'S',
+                            style: Styles.white22.copyWith(
+                                color: ColorsValue.primaryColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(
+                            text: 'agar ',
+                            style: Styles.white20,
+                          ),
+                          TextSpan(
+                            text: 'K',
+                            style: Styles.white22.copyWith(
+                                color: ColorsValue.primaryColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
-                      TextSpan(
-                        text: 'agar ',
-                        style: Styles.white20,
-                      ),
-                      TextSpan(
-                        text: 'K',
-                        style: Styles.white22.copyWith(
-                            color: ColorsValue.primaryColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Dimens.boxWidth10,
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Dimens.ten, vertical: Dimens.three),
-                  decoration: BoxDecoration(
-                    color: ColorsValue.primaryColor.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(Dimens.fifty),
-                    border: Border.all(color: ColorsValue.primaryColor),
-                  ),
-                  child: Text(
-                    'Frontend Developer',
-                    style: Styles.white10.copyWith(
-                      color: ColorsValue.primaryColor,
-                      fontWeight: FontWeight.w600,
                     ),
-                  ),
+                    Dimens.boxWidth10,
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: Dimens.ten, vertical: Dimens.three),
+                      decoration: BoxDecoration(
+                        color: ColorsValue.primaryColor.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(Dimens.fifty),
+                        border: Border.all(color: ColorsValue.primaryColor),
+                      ),
+                      child: Text(
+                        'Frontend Developer',
+                        style: Styles.white10.copyWith(
+                          color: ColorsValue.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                if (device == DeviceScreenType.web) ...[
-                  const Spacer(),
-                  CustomTextButton(
-                    title: 'HOME',
-                    onPressed: () => _scrollToSection(_homeKey),
-                  ),
-                  CustomTextButton(
-                    title: 'SKILLS',
-                    onPressed: () => _scrollToSection(_skillsKey),
-                  ),
-                  CustomTextButton(
-                    title: 'PROJECTS',
-                    onPressed: () => _scrollToSection(_projectsKey),
-                  ),
-                  CustomTextButton(
-                    title: 'CONTACT',
-                    onPressed: () => _scrollToSection(_contactKey),
-                  ),
-                ],
-                if (device != DeviceScreenType.web) ...[
-                  const Spacer(),
-                  IconButton(
-                    onHover: (value) {
-                      setState(() {
-                        _isHovered = value;
-                      });
-                    },
-                    onPressed: () {
-                      _scaffoldKey.currentState?.openEndDrawer();
-                    },
-                    icon: Icon(Icons.menu,
-                        color: _isHovered
-                            ? ColorsValue.primaryColor
-                            : Colors.white),
-                  ),
-                ]
+              ),
+              if (device == DeviceScreenType.web) ...[
+                const Spacer(),
+                CustomTextButton(
+                  title: 'HOME',
+                  onPressed: () => _scrollToSection(_homeKey),
+                ),
+                CustomTextButton(
+                  title: 'SKILLS',
+                  onPressed: () => _scrollToSection(_skillsKey),
+                ),
+                CustomTextButton(
+                  title: 'PROJECTS',
+                  onPressed: () => _scrollToSection(_projectsKey),
+                ),
+                CustomTextButton(
+                  title: 'CONTACT',
+                  onPressed: () => _scrollToSection(_contactKey),
+                ),
               ],
-            ),
+              if (device != DeviceScreenType.web) ...[
+                const Spacer(),
+                IconButton(
+                  onHover: (value) {
+                    setState(() {
+                      _isHovered = value;
+                    });
+                  },
+                  onPressed: () {
+                    _scaffoldKey.currentState?.openEndDrawer();
+                  },
+                  icon: Icon(Icons.menu,
+                      color:
+                          _isHovered ? ColorsValue.primaryColor : Colors.white),
+                ),
+              ]
+            ],
           ),
         ),
       ),

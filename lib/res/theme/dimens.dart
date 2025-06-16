@@ -58,7 +58,9 @@ class Dimens {
   static const Widget boxHeight24 = SizedBox(height: twentyFour);
   static const Widget boxHeight32 = SizedBox(height: thirtyTwo);
   static const Widget boxHeight30 = SizedBox(height: thirty);
+  static const Widget boxHeight40 = SizedBox(height: forty);
   static const Widget boxHeight50 = SizedBox(height: fifty);
+  static const Widget boxHeight60 = SizedBox(height: sixty);
   static const Widget boxWidth2 = SizedBox(width: two);
   static const Widget boxWidth4 = SizedBox(width: four);
   static const Widget boxWidth8 = SizedBox(width: eight);

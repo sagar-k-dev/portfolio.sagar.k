@@ -39,4 +39,11 @@ class AssetConstants {
   static const String forecaddie = 'assets/app_icons/forecaddie.webp';
   static const String plateaway = 'assets/app_icons/plateaway.png';
   static const String findAPro = 'assets/app_icons/find_a_pro.webp';
+  static const String profile = 'assets/display_picture.JPG';
+  static const String whatsapp = 'assets/whatsapp.svg';
+  static const String email = 'assets/email.svg';
+  static const String linkedin = 'assets/linkedin.svg';
+  static const String github = 'assets/github.svg';
+  static const String instagram = 'assets/instagram.svg';
+  static const String send = 'assets/send.svg';
 }
