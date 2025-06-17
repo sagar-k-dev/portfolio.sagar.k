@@ -33,11 +33,6 @@
   <title>Sagar K | Application Developer</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-  </script>
-
   <!-- Loading indicator -->
   <div id="loading-indicator" style="
     position: fixed;
@@ -52,32 +47,46 @@
     <div style="color: green; font-family: Arial;">Hey Buddy, Welcome! Grab a virtual coffee while I set up ☕.</div>
   </div>
 
+  <script src="flutter.js" defer></script>
   <script>
-    window.addEventListener('load', function (ev) {
-      var loading = document.querySelector('#loading-indicator');
+    window.addEventListener('load', function () {
+      var loadingIndicator = document.getElementById('loading-indicator');
 
-      // Initialize Flutter
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: async function (engineInitializer) {
-          loading.textContent = 'Initializing engine...';
-          let appRunner = await engineInitializer.initializeEngine();
-          loading.textContent = 'Running app...';
-          await appRunner.runApp();
-          loading.remove();
-        }
-      }).catch(function (error) {
-        console.error('Flutter initialization error:', error);
-        loading.textContent = 'Failed to load application. Please refresh the page.';
-      });
+      if (!window.flutter_web_optimizer) {
+        window.flutter_web_optimizer = {
+          loadEntrypoint: function () {
+            try {
+              window._flutter.loader.loadEntrypoint({
+                serviceWorker: {
+                  serviceWorkerVersion: '{{flutter_service_worker_version}}',
+                },
+                onEntrypointLoaded: async function (engineInitializer) {
+                  try {
+                    const appRunner = await engineInitializer.initializeEngine();
+                    await appRunner.runApp();
+                    if (loadingIndicator) {
+                      loadingIndicator.remove();
+                    }
+                  } catch (e) {
+                    console.error('Error running app:', e);
+                  }
+                }
+              });
+            } catch (e) {
+              console.error('Error loading entrypoint:', e);
+            }
+          }
+        };
+      }
+
+      setTimeout(function () {
+        window.flutter_web_optimizer.loadEntrypoint();
+      }, 100);
     });
   </script>
 </head>
 
 <body>
-  <script src="flutter.js" defer></script>
 </body>
 
 </html>
