@@ -54,7 +54,7 @@ To update the web build for deployment on GitHub Pages, follow these steps:
 
 3. Build the web version in release mode:
    ```bash
-   flutter build web --release
+   flutter build web --base-href="/portfolio.sagar.k/"
    ```
 
 4. Copy the build files to the docs folder:

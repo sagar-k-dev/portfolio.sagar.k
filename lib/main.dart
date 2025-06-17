@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:portfolio/res/res.dart';
 import 'package:portfolio/views/views.dart';
 import 'package:portfolio/widgets/widgets.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'utils/navigators/navigators.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
