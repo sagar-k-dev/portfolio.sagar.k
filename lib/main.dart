@@ -8,10 +8,10 @@ import 'utils/navigators/navigators.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await GoogleFonts.pendingFonts([
     GoogleFonts.gelasio(),
   ]);
-  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: ColorsValue.primaryColor,
+          fontFamily: GoogleFonts.gelasio().fontFamily,
         ),
         getPages: AppPages.pages,
         initialRoute: AppPages.initial,
