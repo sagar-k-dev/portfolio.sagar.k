@@ -25,7 +25,7 @@ class AppPages {
       transitionDuration: transitionDuration,
       page: HomeView.new,
       binding: HomeBinding(),
-      transition: Transition.rightToLeft,
+      transition: Transition.fadeIn,
     ),
   ];
 }
