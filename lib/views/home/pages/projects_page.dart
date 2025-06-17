@@ -15,25 +15,6 @@ class ProjectsPage extends StatelessWidget {
 
   final List<Map<String, String>> projects = [
     {
-      'title': 'instrucko',
-      'image': AssetConstants.instrucko,
-      'playStoreLink':
-          'https://play.google.com/store/apps/details?id=com.instrucko',
-      'appStoreLink': 'https://apps.apple.com/in/app/instrucko/id1632440837',
-      'description':
-          'Instrucko is an innovative educational platform designed to connect students in the UK and India with tailored learning experiences. The app empowers parents to book on-demand classes for their children, selecting subjects and age groups that best fit their needs. Key features include one-on-one video sessions, real-time chat, and live streaming, ensuring interactive and flexible learning. The integrated wallet system streamlines payments, making class bookings seamless and secure. This project demonstrates my ability to build user-centric, feature-rich applications that enhance online education.',
-    },
-    {
-      'title': 'Dignity Transportation',
-      'image': AssetConstants.dignityTransportation,
-      'playStoreLink':
-          'https://play.google.com/store/apps/details?id=com.dignity_transportation',
-      'appStoreLink':
-          'https://apps.apple.com/us/app/dignity-transportation/id6466097977',
-      'description':
-          'Dignity Transportation is a specialized mobility platform I developed for Ontario, Canada\'s premier medical transport service. The app streamlines coordination between dispatchers and drivers, featuring real-time GPS tracking, optimized routing for medical appointments, and a patient-centric booking interface. My implementation includes secure medical data handling, appointment scheduling integration, and a robust notification system for both drivers and passengers. The solution significantly improved operational efficiency while enhancing the transportation experience for vulnerable patients across the Greater Toronto Area.',
-    },
-    {
       'title': 'ClubCentral',
       'image': AssetConstants.foretees,
       'playStoreLink':
@@ -59,6 +40,25 @@ class ProjectsPage extends StatelessWidget {
       'websiteLink': 'https://plateway.newkommerce.com/',
       'description':
           'Plateaway delivers comprehensive restaurant management through an intuitive admin dashboard. This robust platform centralizes product inventory, menu customization, promotional offer creation, and staff role management in one streamlined interface. Restaurant owners gain complete control over their digital presence with drag-and-drop menu builders, time-sensitive promotional tools, and granular permission settings for staff access. My development focused on creating responsive data visualization components, implementing batch operations for menu updates, and designing intuitive workflows that minimize training requirements. The system\'s analytics module provides actionable insights on menu performance, helping owners optimize their offerings while the integrated user management ensures proper access controls across all restaurant operations.',
+    },
+    {
+      'title': 'instrucko',
+      'image': AssetConstants.instrucko,
+      'playStoreLink':
+          'https://play.google.com/store/apps/details?id=com.instrucko',
+      'appStoreLink': 'https://apps.apple.com/in/app/instrucko/id1632440837',
+      'description':
+          'Instrucko is an innovative educational platform designed to connect students in the UK and India with tailored learning experiences. The app empowers parents to book on-demand classes for their children, selecting subjects and age groups that best fit their needs. Key features include one-on-one video sessions, real-time chat, and live streaming, ensuring interactive and flexible learning. The integrated wallet system streamlines payments, making class bookings seamless and secure. This project demonstrates my ability to build user-centric, feature-rich applications that enhance online education.',
+    },
+    {
+      'title': 'Dignity Transportation',
+      'image': AssetConstants.dignityTransportation,
+      'playStoreLink':
+          'https://play.google.com/store/apps/details?id=com.dignity_transportation',
+      'appStoreLink':
+          'https://apps.apple.com/us/app/dignity-transportation/id6466097977',
+      'description':
+          'Dignity Transportation is a specialized mobility platform I developed for Ontario, Canada\'s premier medical transport service. The app streamlines coordination between dispatchers and drivers, featuring real-time GPS tracking, optimized routing for medical appointments, and a patient-centric booking interface. My implementation includes secure medical data handling, appointment scheduling integration, and a robust notification system for both drivers and passengers. The solution significantly improved operational efficiency while enhancing the transportation experience for vulnerable patients across the Greater Toronto Area.',
     },
     {
       'title': 'Find A Professional',
