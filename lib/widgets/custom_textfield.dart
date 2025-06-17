@@ -123,8 +123,8 @@ class CustomTextfield extends StatelessWidget {
             filled: isFilled,
             fillColor: fillColor,
             border: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: Colors.grey,
+              borderSide: BorderSide(
+                color: ColorsValue.primaryColor.withValues(alpha: 0.3),
                 width: 1.5,
               ),
               borderRadius: BorderRadius.circular(
@@ -135,7 +135,7 @@ class CustomTextfield extends StatelessWidget {
             enabledBorder: formBorder ??
                 OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Colors.grey.withValues(alpha: 0.3),
+                    color: ColorsValue.primaryColor.withValues(alpha: 0.3),
                     width: Dimens.one,
                   ),
                   borderRadius: BorderRadius.circular(
