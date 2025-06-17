@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       data:
           MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(scale)),
       child: GetMaterialApp(
+        title: 'Sagar K | Application Developer',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: ColorsValue.primaryColor,
