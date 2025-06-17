@@ -15,78 +15,27 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Portfolio website of Sagar K, Application Developer">
+  <meta name="description" content="A new Flutter project.">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Sagar K | Application Developer">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>Sagar K | Application Developer</title>
+  <title>flutter_foretees_staff</title>
   <link rel="manifest" href="manifest.json">
-
-  <!-- Loading indicator -->
-  <div id="loading-indicator" style="
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000000;">
-    <div style="color: green; font-family: Arial;">Hey Buddy, Welcome! Grab a virtual coffee while I set up ☕.</div>
-  </div>
-
-  <script src="flutter.js" defer></script>
-  <script>
-    window.addEventListener('load', function () {
-      var loadingIndicator = document.getElementById('loading-indicator');
-
-      if (!window.flutter_web_optimizer) {
-        window.flutter_web_optimizer = {
-          loadEntrypoint: function () {
-            try {
-              window._flutter.loader.loadEntrypoint({
-                serviceWorker: {
-                  serviceWorkerVersion: '{{flutter_service_worker_version}}',
-                },
-                onEntrypointLoaded: async function (engineInitializer) {
-                  try {
-                    const appRunner = await engineInitializer.initializeEngine();
-                    await appRunner.runApp();
-                    if (loadingIndicator) {
-                      loadingIndicator.remove();
-                    }
-                  } catch (e) {
-                    console.error('Error running app:', e);
-                  }
-                }
-              });
-            } catch (e) {
-              console.error('Error loading entrypoint:', e);
-            }
-          }
-        };
-      }
-
-      setTimeout(function () {
-        window.flutter_web_optimizer.loadEntrypoint();
-      }, 100);
-    });
-  </script>
 </head>
 
 <body>
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 
 </html>
