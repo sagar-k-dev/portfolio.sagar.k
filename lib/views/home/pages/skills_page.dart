@@ -188,7 +188,7 @@ class SkillPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 300,
                               child: Lottie.asset(
                                 AssetConstants.skillsAnimation,

@@ -25,7 +25,7 @@ class CustomTextButton extends StatelessWidget {
             if (states.contains(WidgetState.hovered)) {
               return ColorsValue.primaryColor;
             }
-            return Colors.white;
+            return Colors.white.withValues(alpha: 0.8);
           },
         ),
         overlayColor: WidgetStateProperty.resolveWith<Color>(

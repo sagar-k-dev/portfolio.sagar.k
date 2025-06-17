@@ -12,15 +12,12 @@ class ContactsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final device = DeviceType(context).deviceType;
+    final orientation = MediaQuery.of(context).orientation;
     final nameTextController = TextEditingController();
     final emailTextController = TextEditingController();
     final subjectTextController = TextEditingController();
     final messageTextController = TextEditingController();
     return SizedBox(
-      // height: device == DeviceScreenType.web
-      //     ? MediaQuery.of(context).size.height -
-      //         (AppBar().preferredSize.height * 2)
-      //     : null,
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Column(
@@ -55,87 +52,75 @@ class ContactsPage extends StatelessWidget {
               ),
             ),
             Dimens.boxHeight20,
-            device == DeviceScreenType.web
+            (device == DeviceScreenType.web)
                 ? Row(
-                    spacing: Dimens.ten,
+                    spacing: Dimens.fifty,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ContactOptionCard(
-                          title: 'Email me at',
-                          value: 'sagarkdev7@gmail.com',
-                          onTap: () =>
-                              Utility.launchURL('mailto:sagarkdev7@gmail.com'),
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              ColorsValue.primaryColor.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(Dimens.fifteen),
+                          border: Border.all(color: ColorsValue.primaryColor),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(Dimens.fifteen),
+                          child: Image.asset(
+                            AssetConstants.profile,
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: MediaQuery.of(context).size.width * 0.15,
+                            fit: BoxFit.fitHeight,
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: ContactOptionCard(
-                          title: 'Chat over WhatsApp',
-                          value: '+91 7381748199',
-                          onTap: () =>
-                              Utility.launchURL('https://wa.me/917381748199'),
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: Dimens.fifteen,
+                          children: [
+                            Text('Who am I?', style: Styles.white12),
+                            Text(
+                              'A self-taught Flutter developer who turned curiosity into a passion! Starting from scratch, I embarked on an exciting journey of learning application development. Through countless hours of coding, experimenting, and building, I\'ve transformed my fascination with technology into the ability to create beautiful, functional apps. Every line of code I write is a testament to my dedication to learning and growing in this ever-evolving tech world.',
+                              style: Styles.white8,
+                            ),
+                          ],
                         ),
                       ),
-                      Expanded(
-                        child: ContactOptionCard(
-                          title: 'Connect on LinkedIn',
-                          value: 'Sagar K',
-                          onTap: () => Utility.launchURL(
-                              'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
+                      if (device == DeviceScreenType.web)
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
                         ),
-                      ),
                     ],
                   )
                 : Column(
-                    spacing: Dimens.ten,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ContactOptionCard(
-                        title: 'Email me at',
-                        value: 'sagarkdev7@gmail.com',
-                        onTap: () =>
-                            Utility.launchURL('mailto:sagarkdev7@gmail.com'),
-                      ),
-                      ContactOptionCard(
-                        title: 'Chat over WhatsApp',
-                        value: '+91 7381748199',
-                        onTap: () =>
-                            Utility.launchURL('https://wa.me/917381748199'),
-                      ),
-                      ContactOptionCard(
-                        title: 'Connect on LinkedIn',
-                        value: 'Sagar K',
-                        onTap: () => Utility.launchURL(
-                            'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
-                      ),
-                    ],
-                  ),
-            Dimens.boxHeight40,
-            Row(
-              spacing: Dimens.twenty,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: ColorsValue.primaryColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(Dimens.fifteen),
-                    border: Border.all(color: ColorsValue.primaryColor),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(Dimens.fifteen),
-                    child: Image.asset(
-                      AssetConstants.profile,
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      // fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: Dimens.fifteen,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color:
+                              ColorsValue.primaryColor.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(Dimens.fifteen),
+                          border: Border.all(color: ColorsValue.primaryColor),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(Dimens.fifteen),
+                          child: Image.asset(
+                            AssetConstants.profile,
+                            width: device == DeviceScreenType.mobile
+                                ? MediaQuery.of(context).size.width * 0.3
+                                : MediaQuery.of(context).size.width * 0.2,
+                            height: device == DeviceScreenType.mobile
+                                ? MediaQuery.of(context).size.width * 0.3
+                                : MediaQuery.of(context).size.width * 0.2,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
                       Text('Who am I?', style: Styles.white12),
                       Text(
                         'A self-taught Flutter developer who turned curiosity into a passion! Starting from scratch, I embarked on an exciting journey of learning application development. Through countless hours of coding, experimenting, and building, I\'ve transformed my fascination with technology into the ability to create beautiful, functional apps. Every line of code I write is a testament to my dedication to learning and growing in this ever-evolving tech world.',
@@ -143,18 +128,49 @@ class ContactsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    spacing: Dimens.fifteen,
-                    mainAxisSize: MainAxisSize.min,
+            Dimens.boxHeight20,
+            Text('Let\'s discuss your queries.', style: Styles.white10),
+            Dimens.boxHeight10,
+            (device == DeviceScreenType.web)
+                ? Row(
+                    spacing: Dimens.forty,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Let\'s discuss your queries.',
-                          style: Styles.white12),
-                      (device == DeviceScreenType.web)
-                          ? Row(
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          spacing: Dimens.ten,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ContactOptionCard(
+                              title: 'Email me at',
+                              value: 'sagarkdev7@gmail.com',
+                              onTap: () => Utility.launchURL(
+                                  'mailto:sagarkdev7@gmail.com'),
+                            ),
+                            ContactOptionCard(
+                              title: 'Chat over WhatsApp',
+                              value: '+91 7381748199',
+                              onTap: () => Utility.launchURL(
+                                  'https://wa.me/917381748199'),
+                            ),
+                            ContactOptionCard(
+                              title: 'Connect on LinkedIn',
+                              value: 'Sagar K',
+                              onTap: () => Utility.launchURL(
+                                  'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          spacing: Dimens.ten,
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Row(
                               spacing: Dimens.ten,
                               children: [
                                 Expanded(
@@ -175,50 +191,22 @@ class ContactsPage extends StatelessWidget {
                                     labelText: 'Email',
                                     isFilled: true,
                                     fillColor: ColorsValue.primaryColor
-                                        .withValues(alpha: 0.1),
+                                        .withValues(alpha: 0.15),
                                     onChange: (String value) {},
                                   ),
                                 ),
                               ],
-                            )
-                          : Column(
-                              spacing: Dimens.ten,
-                              children: [
-                                CustomTextfield(
-                                  textEditingController: nameTextController,
-                                  hintText: 'Enter your name',
-                                  labelText: 'Name',
-                                  isFilled: true,
-                                  fillColor: ColorsValue.primaryColor
-                                      .withValues(alpha: 0.1),
-                                  onChange: (String value) {},
-                                ),
-                                CustomTextfield(
-                                  textEditingController: emailTextController,
-                                  hintText: 'Enter your email',
-                                  labelText: 'Email',
-                                  isFilled: true,
-                                  fillColor: ColorsValue.primaryColor
-                                      .withValues(alpha: 0.1),
-                                  onChange: (String value) {},
-                                ),
-                              ],
                             ),
-                      CustomTextfield(
-                        textEditingController: subjectTextController,
-                        hintText: 'Want to connect for..',
-                        labelText: 'Subject',
-                        isFilled: true,
-                        fillColor:
-                            ColorsValue.primaryColor.withValues(alpha: 0.1),
-                        onChange: (String value) {},
-                      ),
-                      Row(
-                        spacing: Dimens.ten,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: CustomTextfield(
+                            CustomTextfield(
+                              textEditingController: subjectTextController,
+                              hintText: 'Want to connect for..',
+                              labelText: 'Subject',
+                              isFilled: true,
+                              fillColor: ColorsValue.primaryColor
+                                  .withValues(alpha: 0.1),
+                              onChange: (String value) {},
+                            ),
+                            CustomTextfield(
                               textEditingController: messageTextController,
                               hintText: 'Write your query here',
                               labelText: 'Message',
@@ -228,69 +216,182 @@ class ContactsPage extends StatelessWidget {
                               maxlines: 4,
                               onChange: (String value) {},
                             ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: ColorsValue.primaryColor
+                                    .withValues(alpha: 0.8),
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimens.eight),
+                                ),
+                              ),
+                              onPressed: () {
+                                final subject = Uri.encodeComponent(
+                                    subjectTextController.text);
+                                final body = Uri.encodeComponent(
+                                    messageTextController.text);
+                                final mailtoUrl =
+                                    'mailto:sagarkdev7@gmail.com?subject=$subject&body=$body';
+                                Utility.launchURL(mailtoUrl);
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SvgPicture.asset(
+                                    AssetConstants.send,
+                                    width: Dimens.twenty,
+                                    height: Dimens.twenty,
+                                  ),
+                                  Dimens.boxWidth10,
+                                  Text('Send', style: Styles.white8),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    spacing: Dimens.ten,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      ContactOptionCard(
+                        title: 'Email me at',
+                        value: 'sagarkdev7@gmail.com',
+                        onTap: () =>
+                            Utility.launchURL('mailto:sagarkdev7@gmail.com'),
+                      ),
+                      ContactOptionCard(
+                        title: 'Chat over WhatsApp',
+                        value: '+91 7381748199',
+                        onTap: () =>
+                            Utility.launchURL('https://wa.me/917381748199'),
+                      ),
+                      ContactOptionCard(
+                        title: 'Connect on LinkedIn',
+                        value: 'Sagar K',
+                        onTap: () => Utility.launchURL(
+                            'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
+                      ),
+                      Dimens.boxHeight16,
+                      CustomTextfield(
+                        textEditingController: nameTextController,
+                        hintText: 'Enter your name',
+                        labelText: 'Name',
+                        isFilled: true,
+                        fillColor:
+                            ColorsValue.primaryColor.withValues(alpha: 0.15),
+                        onChange: (String value) {},
+                      ),
+                      CustomTextfield(
+                        textEditingController: emailTextController,
+                        hintText: 'Enter your email',
+                        labelText: 'Email',
+                        isFilled: true,
+                        fillColor:
+                            ColorsValue.primaryColor.withValues(alpha: 0.1),
+                        onChange: (String value) {},
+                      ),
+                      CustomTextfield(
+                        textEditingController: subjectTextController,
+                        hintText: 'Want to connect for..',
+                        labelText: 'Subject',
+                        isFilled: true,
+                        fillColor:
+                            ColorsValue.primaryColor.withValues(alpha: 0.1),
+                        onChange: (String value) {},
+                      ),
+                      CustomTextfield(
+                        textEditingController: messageTextController,
+                        hintText: 'Write your query here',
+                        labelText: 'Message',
+                        isFilled: true,
+                        fillColor:
+                            ColorsValue.primaryColor.withValues(alpha: 0.1),
+                        maxlines: 4,
+                        onChange: (String value) {},
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              ColorsValue.primaryColor.withValues(alpha: 0.8),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(Dimens.eight),
                           ),
-                          HoverElevatedButton(
-                            onPressed: () {
-                              final subject = Uri.encodeComponent(
-                                  subjectTextController.text);
-                              final body = Uri.encodeComponent(
-                                  messageTextController.text);
-                              final mailtoUrl =
-                                  'mailto:sagarkdev7@gmail.com?subject=$subject&body=$body';
-                              Utility.launchURL(mailtoUrl);
-                            },
-                            icon: AssetConstants.send,
-                            label: Text('Submit', style: Styles.white8),
-                            backgroundColor: ColorsValue.primaryColor,
-                          ),
-                        ],
+                        ),
+                        onPressed: () {
+                          final subject =
+                              Uri.encodeComponent(subjectTextController.text);
+                          final body =
+                              Uri.encodeComponent(messageTextController.text);
+                          final mailtoUrl =
+                              'mailto:sagarkdev7@gmail.com?subject=$subject&body=$body';
+                          Utility.launchURL(mailtoUrl);
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                              AssetConstants.send,
+                              width: Dimens.twenty,
+                              height: Dimens.twenty,
+                            ),
+                            Dimens.boxWidth10,
+                            Text('Send', style: Styles.white8),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            Dimens.boxHeight50,
-            Row(
-              spacing: Dimens.twenty,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                HoverElevatedButton(
-                  onPressed: () =>
-                      Utility.launchURL('https://wa.me/917381748199'),
-                  icon: AssetConstants.whatsapp,
-                  label: Text('WhatsApp', style: Styles.white8),
-                  backgroundColor: ColorsValue.primaryColor,
-                ),
-                HoverElevatedButton(
-                  onPressed: () =>
-                      Utility.launchURL('mailto:sagarkdev7@gmail.com'),
-                  icon: AssetConstants.email,
-                  label: Text('Email', style: Styles.white8),
-                  backgroundColor: Colors.red,
-                ),
-                HoverElevatedButton(
-                  onPressed: () => Utility.launchURL(
-                      'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
-                  icon: AssetConstants.linkedin,
-                  label: Text('LinkedIn', style: Styles.white8),
-                  backgroundColor: Colors.blue,
-                ),
-                HoverElevatedButton(
-                  onPressed: () =>
-                      Utility.launchURL('https://github.com/sagar-k-dev'),
-                  icon: AssetConstants.github,
-                  label: Text('GitHub', style: Styles.white8),
-                  backgroundColor: Color(0xFF612b8f),
-                ),
-                HoverElevatedButton(
-                  onPressed: () => Utility.launchURL(
-                      'https://www.instagram.com/sagarstark7/'),
-                  icon: AssetConstants.instagram,
-                  label: Text('Instagram', style: Styles.white8),
-                  backgroundColor: Colors.pink,
-                ),
-              ],
+            Dimens.boxHeight40,
+            Container(
+              padding: Dimens.edgeInsets16,
+              alignment: Alignment.center,
+              child: Wrap(
+                spacing: Dimens.twenty,
+                runSpacing: Dimens.twenty,
+                alignment: WrapAlignment.center,
+                children: [
+                  HoverElevatedButton(
+                    onPressed: () =>
+                        Utility.launchURL('https://wa.me/917381748199'),
+                    icon: AssetConstants.whatsapp,
+                    label: Text('WhatsApp', style: Styles.white8),
+                    backgroundColor: ColorsValue.primaryColor,
+                  ),
+                  HoverElevatedButton(
+                    onPressed: () =>
+                        Utility.launchURL('mailto:sagarkdev7@gmail.com'),
+                    icon: AssetConstants.email,
+                    label: Text('Email', style: Styles.white8),
+                    backgroundColor: Colors.red,
+                  ),
+                  HoverElevatedButton(
+                    onPressed: () => Utility.launchURL(
+                        'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
+                    icon: AssetConstants.linkedin,
+                    label: Text('LinkedIn', style: Styles.white8),
+                    backgroundColor: Colors.blue,
+                  ),
+                  HoverElevatedButton(
+                    onPressed: () =>
+                        Utility.launchURL('https://github.com/sagar-k-dev'),
+                    icon: AssetConstants.github,
+                    label: Text('GitHub', style: Styles.white8),
+                    backgroundColor: const Color(0xFF612b8f),
+                  ),
+                  HoverElevatedButton(
+                    onPressed: () => Utility.launchURL(
+                        'https://www.instagram.com/sagarstark7/'),
+                    icon: AssetConstants.instagram,
+                    label: Text('Instagram', style: Styles.white8),
+                    backgroundColor: Colors.pink,
+                  ),
+                ],
+              ),
             ),
             Dimens.boxHeight10,
             Container(
@@ -298,7 +399,7 @@ class ContactsPage extends StatelessWidget {
               alignment: Alignment.center,
               padding: Dimens.edgeInsets16,
               child: Text(
-                'Thanks for stopping by! Crafted with ❤️ using Flutter by Sagar K.',
+                'Thanks for stopping by! Crafted with 💙 using Flutter by Sagar K.',
                 style: Styles.white8,
               ),
             ),
@@ -347,7 +448,7 @@ class ContactOptionCard extends StatelessWidget {
                 Text(
                   value,
                   style: Styles.white10.copyWith(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     fontFamily: 'Poppins',
                   ),
                 ),
