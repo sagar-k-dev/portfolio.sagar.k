@@ -11,8 +11,6 @@ import 'package:portfolio/widgets/responsive_builder.dart';
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
-  static const String route = '/home';
-
   @override
   State<HomeView> createState() => _HomeViewState();
 }

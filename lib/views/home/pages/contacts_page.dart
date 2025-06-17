@@ -74,7 +74,7 @@ class ContactsPage extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        flex: 3,
+                        flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,11 +88,10 @@ class ContactsPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      if (device == DeviceScreenType.web)
-                        Expanded(
-                          flex: 2,
-                          child: Container(),
-                        ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(),
+                      ),
                     ],
                   )
                 : Column(

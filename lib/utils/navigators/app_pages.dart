@@ -17,15 +17,15 @@ class AppPages {
     milliseconds: 350,
   );
 
-  static const initial = Routes.home;
+  // static const initial = Routes.home;
 
-  static final pages = [
-    GetPage<HomeView>(
-      name: Routes.home,
-      transitionDuration: transitionDuration,
-      page: HomeView.new,
-      binding: HomeBinding(),
-      transition: Transition.fadeIn,
-    ),
-  ];
+  // static final pages = [
+  //   GetPage<HomeView>(
+  //     name: Routes.home,
+  //     transitionDuration: transitionDuration,
+  //     page: HomeView.new,
+  //     binding: HomeBinding(),
+  //     transition: Transition.fadeIn,
+  //   ),
+  // ];
 }
