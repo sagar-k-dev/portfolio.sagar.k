@@ -34,23 +34,17 @@
   <link rel="manifest" href="manifest.json">
 
   <script>
-    // Restore the route if coming from 404.html
-    (function () {
-      var redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect != location.pathname) {
-        history.replaceState(null, null, redirect);
-      }
-    })();
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = "2602220574";
   </script>
 
   <script>
     // Serve the same content for all routes
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
-      _flutter.loader.load({
+      _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: null,
+          serviceWorkerVersion: serviceWorkerVersion,
         }
       });
     });
