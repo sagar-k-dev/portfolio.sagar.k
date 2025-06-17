@@ -12,7 +12,6 @@ class ContactsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final device = DeviceType(context).deviceType;
-    final orientation = MediaQuery.of(context).orientation;
     final nameTextController = TextEditingController();
     final emailTextController = TextEditingController();
     final subjectTextController = TextEditingController();
