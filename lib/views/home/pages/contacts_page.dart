@@ -273,7 +273,11 @@ class ContactsPage extends StatelessWidget {
                         onTap: () => Utility.launchURL(
                             'https://www.linkedin.com/in/sagar-k-bb1a97195/'),
                       ),
-                      Dimens.boxHeight16,
+                      // Dimens.boxHeight16,
+                      const Divider(
+                          color: ColorsValue.primaryColor,
+                          thickness: 0.5,
+                          height: 30),
                       CustomTextfield(
                         textEditingController: nameTextController,
                         hintText: 'Enter your name',
@@ -345,12 +349,12 @@ class ContactsPage extends StatelessWidget {
                     ],
                   ),
             Dimens.boxHeight40,
+            const Divider(color: ColorsValue.primaryColor, thickness: 0.5),
             Container(
-              padding: Dimens.edgeInsets16,
               alignment: Alignment.center,
               child: Wrap(
                 spacing: Dimens.twenty,
-                runSpacing: Dimens.twenty,
+                runSpacing: Dimens.ten,
                 alignment: WrapAlignment.center,
                 children: [
                   HoverElevatedButton(
@@ -391,7 +395,7 @@ class ContactsPage extends StatelessWidget {
                 ],
               ),
             ),
-            Dimens.boxHeight10,
+            const Divider(color: ColorsValue.primaryColor, thickness: 0.5),
             Container(
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.center,
@@ -399,6 +403,7 @@ class ContactsPage extends StatelessWidget {
               child: Text(
                 'Thanks for stopping by! Crafted with 💙 using Flutter by Sagar K.',
                 style: Styles.white8,
+                textAlign: TextAlign.center,
               ),
             ),
             Dimens.boxHeight10,

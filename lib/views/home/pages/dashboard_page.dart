@@ -208,7 +208,8 @@ class DashboardPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => Utility.launchURL(
+                        'https://drive.google.com/file/d/1DOFouYEewyGlTI4PTtkGk6uwX7jPmLjq/view?usp=sharing'),
                     child: Text(
                       'My Resume',
                       style: Styles.white8.copyWith(
