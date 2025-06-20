@@ -23,3 +23,8 @@ enum DeviceScreenType {
   tablet,
   web;
 }
+
+enum ButtonType {
+  continued,
+  cancelled;
+}

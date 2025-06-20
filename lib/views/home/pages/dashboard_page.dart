@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio/res/res.dart';
 import 'package:portfolio/utils/utils.dart';
+import 'package:portfolio/widgets/custom_animated_button.dart';
 import 'package:portfolio/widgets/responsive_builder.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -101,53 +102,29 @@ class DashboardPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    padding: WidgetStateProperty.all(
-                                        const EdgeInsets.symmetric(
-                                            vertical: Dimens.fifteen)),
-                                    backgroundColor: WidgetStateProperty.all(
-                                        ColorsValue.primaryColor
-                                            .withValues(alpha: 0.8)),
-                                  ),
-                                  onPressed: onWorkButtonPressed,
-                                  child: Text(
-                                    'My Work',
-                                    style: Styles.white8.copyWith(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                                child: CustomButton(
+                                  radius: Dimens.hundred,
+                                  onPress: onWorkButtonPressed,
+                                  color: ColorsValue.primaryColor
+                                      .withValues(alpha: .8),
+                                  titleWidget: Text('My Work',
+                                      style: Styles.white8.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold)),
                                 ),
                               ),
                               Dimens.boxWidth20,
                               Expanded(
-                                child: ElevatedButton(
-                                  style: ButtonStyle(
-                                    padding: WidgetStateProperty.all(
-                                        const EdgeInsets.symmetric(
-                                            vertical: Dimens.fifteen)),
-                                    backgroundColor: WidgetStateProperty.all(
-                                        ColorsValue.primaryColor
-                                            .withValues(alpha: 0.2)),
-                                    splashFactory: NoSplash.splashFactory,
-                                    shape: WidgetStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(Dimens.fifty),
-                                        side: const BorderSide(
-                                            color: ColorsValue.primaryColor,
-                                            width: 1.5),
-                                      ),
-                                    ),
-                                  ),
-                                  onPressed: () => Utility.launchURL(
+                                child: CustomButton(
+                                  radius: Dimens.hundred,
+                                  title: 'My Resume',
+                                  color: Colors.grey.shade300,
+                                  onPress: () => Utility.launchURL(
                                       'https://drive.google.com/file/d/1DOFouYEewyGlTI4PTtkGk6uwX7jPmLjq/view?usp=sharing'),
-                                  child: Text(
-                                    'My Resume',
-                                    style: Styles.white8.copyWith(
-                                        color: ColorsValue.primaryColor,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                                  titleWidget: Text('My Resume',
+                                      style: Styles.white8.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600)),
                                 ),
                               ),
                             ],
@@ -173,50 +150,24 @@ class DashboardPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Dimens.boxHeight20,
-                SizedBox(
+                CustomButton(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: Dimens.ten)),
-                      backgroundColor:
-                          WidgetStateProperty.all(ColorsValue.primaryColor),
-                    ),
-                    onPressed: onWorkButtonPressed,
-                    child: Text(
-                      'My Work',
+                  radius: Dimens.hundred,
+                  onPress: onWorkButtonPressed,
+                  titleWidget: Text('My Work',
                       style: Styles.white8.copyWith(
-                          fontWeight: FontWeight.w600, color: Colors.black),
-                    ),
-                  ),
+                          color: Colors.black, fontWeight: FontWeight.bold)),
                 ),
                 Dimens.boxHeight10,
-                SizedBox(
+                CustomButton(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(vertical: Dimens.ten)),
-                      backgroundColor: WidgetStateProperty.all(
-                          ColorsValue.primaryColor.withValues(alpha: 0.2)),
-                      splashFactory: NoSplash.splashFactory,
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(Dimens.fifty),
-                          side: const BorderSide(
-                              color: ColorsValue.primaryColor, width: 1.5),
-                        ),
-                      ),
-                    ),
-                    onPressed: () => Utility.launchURL(
-                        'https://drive.google.com/file/d/1DOFouYEewyGlTI4PTtkGk6uwX7jPmLjq/view?usp=sharing'),
-                    child: Text(
-                      'My Resume',
+                  radius: Dimens.hundred,
+                  color: Colors.grey.shade300,
+                  onPress: () => Utility.launchURL(
+                      'https://drive.google.com/file/d/1DOFouYEewyGlTI4PTtkGk6uwX7jPmLjq/view?usp=sharing'),
+                  titleWidget: Text('My Resume',
                       style: Styles.white8.copyWith(
-                          color: ColorsValue.primaryColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                          color: Colors.black, fontWeight: FontWeight.bold)),
                 ),
               ],
             ),

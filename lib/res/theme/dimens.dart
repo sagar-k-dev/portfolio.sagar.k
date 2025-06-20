@@ -25,6 +25,7 @@ class Dimens {
   static const double twentyFive = 25;
 
   static const double thirty = 30;
+  static const double thirtyFive = 35;
   static const double thirtyTwo = 32;
 
   static const double forty = 40;
