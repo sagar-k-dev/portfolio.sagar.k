@@ -105,8 +105,6 @@ class DashboardPage extends StatelessWidget {
                                 child: CustomButton(
                                   radius: Dimens.hundred,
                                   onPress: onWorkButtonPressed,
-                                  color: ColorsValue.primaryColor
-                                      .withValues(alpha: .8),
                                   titleWidget: Text('My Work',
                                       style: Styles.white8.copyWith(
                                           color: Colors.black,

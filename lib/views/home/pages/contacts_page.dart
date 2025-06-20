@@ -214,36 +214,37 @@ class ContactsPage extends StatelessWidget {
                               maxlines: 4,
                               onChange: (String value) {},
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: ColorsValue.primaryColor
-                                    .withValues(alpha: 0.8),
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(Dimens.eight),
+                            SizedBox(
+                              width: 100,
+                              child: CustomButton(
+                                onPress: () {
+                                  final subject = Uri.encodeComponent(
+                                      subjectTextController.text);
+                                  final body = Uri.encodeComponent(
+                                      messageTextController.text);
+                                  final mailtoUrl =
+                                      'mailto:sagarkdev7@gmail.com?subject=$subject&body=$body';
+                                  Utility.launchURL(mailtoUrl);
+                                },
+                                titleWidget: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      AssetConstants.send,
+                                      width: Dimens.twenty,
+                                      height: Dimens.twenty,
+                                      colorFilter: const ColorFilter.mode(
+                                          Colors.black, BlendMode.srcIn),
+                                    ),
+                                    Dimens.boxWidth10,
+                                    Text('Send',
+                                        style: Styles.white8.copyWith(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
                                 ),
-                              ),
-                              onPressed: () {
-                                final subject = Uri.encodeComponent(
-                                    subjectTextController.text);
-                                final body = Uri.encodeComponent(
-                                    messageTextController.text);
-                                final mailtoUrl =
-                                    'mailto:sagarkdev7@gmail.com?subject=$subject&body=$body';
-                                Utility.launchURL(mailtoUrl);
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(
-                                    AssetConstants.send,
-                                    width: Dimens.twenty,
-                                    height: Dimens.twenty,
-                                  ),
-                                  Dimens.boxWidth10,
-                                  Text('Send', style: Styles.white8),
-                                ],
                               ),
                             ),
                           ],
@@ -348,37 +349,6 @@ class ContactsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // ElevatedButton(
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor:
-                      //         ColorsValue.primaryColor.withValues(alpha: 0.8),
-                      //     foregroundColor: Colors.white,
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.circular(Dimens.eight),
-                      //     ),
-                      //   ),
-                      //   onPressed: () {
-                      //     final subject =
-                      //         Uri.encodeComponent(subjectTextController.text);
-                      //     final body =
-                      //         Uri.encodeComponent(messageTextController.text);
-                      //     final mailtoUrl =
-                      //         'mailto:sagarkdev7@gmail.com?subject=$subject&body=$body';
-                      //     Utility.launchURL(mailtoUrl);
-                      //   },
-                      //   child: Row(
-                      //     mainAxisSize: MainAxisSize.min,
-                      //     children: [
-                      //       SvgPicture.asset(
-                      //         AssetConstants.send,
-                      //         width: Dimens.twenty,
-                      //         height: Dimens.twenty,
-                      //       ),
-                      //       Dimens.boxWidth10,
-                      //       Text('Send', style: Styles.white8),
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
             Dimens.boxHeight40,
