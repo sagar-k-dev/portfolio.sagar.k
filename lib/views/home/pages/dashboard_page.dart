@@ -9,10 +9,7 @@ import 'package:portfolio/widgets/responsive_builder.dart';
 class DashboardPage extends StatelessWidget {
   final Function()? onWorkButtonPressed;
 
-  const DashboardPage({
-    super.key,
-    this.onWorkButtonPressed,
-  });
+  const DashboardPage({super.key, this.onWorkButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +26,14 @@ class DashboardPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (device != DeviceScreenType.web) ...[
-            Center(
-              child: Lottie.asset(AssetConstants.helloAnimation),
-            ),
+            Center(child: Lottie.asset(AssetConstants.helloAnimation)),
             Dimens.boxHeight20,
           ],
           Padding(
             padding: EdgeInsets.only(
-                bottom: device == DeviceScreenType.web
-                    ? Dimens.hundred
-                    : Dimens.zero),
+              bottom:
+                  device == DeviceScreenType.web ? Dimens.hundred : Dimens.zero,
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -105,10 +100,13 @@ class DashboardPage extends StatelessWidget {
                                 child: CustomButton(
                                   radius: Dimens.hundred,
                                   onPress: onWorkButtonPressed,
-                                  titleWidget: Text('My Work',
-                                      style: Styles.white8.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
+                                  titleWidget: Text(
+                                    'My Work',
+                                    style: Styles.white8.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               ),
                               Dimens.boxWidth20,
@@ -118,11 +116,15 @@ class DashboardPage extends StatelessWidget {
                                   title: 'My Resume',
                                   color: Colors.grey.shade300,
                                   onPress: () => Utility.launchURL(
-                                      'https://drive.google.com/file/d/1DOFouYEewyGlTI4PTtkGk6uwX7jPmLjq/view?usp=sharing'),
-                                  titleWidget: Text('My Resume',
-                                      style: Styles.white8.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600)),
+                                    'https://drive.google.com/file/d/1nHNtNqv48bwo35m2h-PQqaqjkXDoF-Ef/view?usp=sharing',
+                                  ),
+                                  titleWidget: Text(
+                                    'My Resume',
+                                    style: Styles.white8.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -135,7 +137,9 @@ class DashboardPage extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          left: Dimens.fifty, bottom: Dimens.fifty),
+                        left: Dimens.fifty,
+                        bottom: Dimens.fifty,
+                      ),
                       child: Lottie.asset(AssetConstants.helloAnimation),
                     ),
                   ),
@@ -152,9 +156,13 @@ class DashboardPage extends StatelessWidget {
                   width: double.infinity,
                   radius: Dimens.hundred,
                   onPress: onWorkButtonPressed,
-                  titleWidget: Text('My Work',
-                      style: Styles.white8.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
+                  titleWidget: Text(
+                    'My Work',
+                    style: Styles.white8.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Dimens.boxHeight10,
                 CustomButton(
@@ -162,10 +170,15 @@ class DashboardPage extends StatelessWidget {
                   radius: Dimens.hundred,
                   color: Colors.grey.shade300,
                   onPress: () => Utility.launchURL(
-                      'https://drive.google.com/file/d/1DOFouYEewyGlTI4PTtkGk6uwX7jPmLjq/view?usp=sharing'),
-                  titleWidget: Text('My Resume',
-                      style: Styles.white8.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
+                    'https://drive.google.com/file/d/1nHNtNqv48bwo35m2h-PQqaqjkXDoF-Ef/view?usp=sharing',
+                  ),
+                  titleWidget: Text(
+                    'My Resume',
+                    style: Styles.white8.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -178,17 +191,15 @@ class DashboardPage extends StatelessWidget {
 class CustomChipWidget extends StatelessWidget {
   final String title;
   final String image;
-  const CustomChipWidget({
-    super.key,
-    required this.title,
-    required this.image,
-  });
+  const CustomChipWidget({super.key, required this.title, required this.image});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: Dimens.ten, vertical: Dimens.three),
+        horizontal: Dimens.ten,
+        vertical: Dimens.three,
+      ),
       decoration: BoxDecoration(
         color: ColorsValue.primaryColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(Dimens.fifty),
