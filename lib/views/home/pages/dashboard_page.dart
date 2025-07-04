@@ -31,8 +31,9 @@ class DashboardPage extends StatelessWidget {
           ],
           Padding(
             padding: EdgeInsets.only(
-              bottom:
-                  device == DeviceScreenType.web ? Dimens.hundred : Dimens.zero,
+              bottom: device == DeviceScreenType.web
+                  ? Dimens.hundred
+                  : Dimens.zero,
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,7 +117,7 @@ class DashboardPage extends StatelessWidget {
                                   title: 'My Resume',
                                   color: Colors.grey.shade300,
                                   onPress: () => Utility.launchURL(
-                                    'https://drive.google.com/file/d/1nHNtNqv48bwo35m2h-PQqaqjkXDoF-Ef/view?usp=sharing',
+                                    'https://drive.google.com/file/d/1PG79BNJLT9Ehz-zyau04nnxvPsOpiNp7/view?usp=sharing',
                                   ),
                                   titleWidget: Text(
                                     'My Resume',
@@ -170,7 +171,7 @@ class DashboardPage extends StatelessWidget {
                   radius: Dimens.hundred,
                   color: Colors.grey.shade300,
                   onPress: () => Utility.launchURL(
-                    'https://drive.google.com/file/d/1nHNtNqv48bwo35m2h-PQqaqjkXDoF-Ef/view?usp=sharing',
+                    'https://drive.google.com/file/d/1PG79BNJLT9Ehz-zyau04nnxvPsOpiNp7/view?usp=sharing',
                   ),
                   titleWidget: Text(
                     'My Resume',
